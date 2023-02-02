@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/discussions" element={<DiscussionsPage />} />
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/uploaded" element={<UploadedPage />} />
+          <Route path="/uploaded/:id" element={<UploadedPage/>}/>
           <Route path="/upload" element={<UploadPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/filters" element={<FiltersPage />} />

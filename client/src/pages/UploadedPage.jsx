@@ -10,21 +10,54 @@ import Logo from "../components/Logo"
 const UploadedPage =() => {
 
   const [buildings, setBuildings] = useState([]);
+  const [showPicture, setshowPicture] = useState("");
 
   useEffect(() => {
-    getBuildingsUploaded();
-  }, []);
+    req();
+  }, [])
+
+const req = async () => {
+  try {
+    const response = await axios.get("api/user/profile", {
+            headers: {
+            "ngrok-skip-browser-warning": "69420"
+            }
+          });
+    console.log (response)
+    const dat = response.data.data
+    const newPicture =  {
+     content : dat.profilpicture_url,
+      id : dat.id,
+      username : dat.username,
+      admin_id:dat.admin_id
+      };
+   setshowPicture(newPicture)
+
+    }
+
+  catch (error) {
+  console.log(error);
+  }
+}
+
+
+
+
+  useEffect(() => {
+  getBuildingsUploaded();
+  }, [])
 
   const getBuildingsUploaded = async () => {
     try {
-      const response = await axios.get('/api/user/mybuildings/2', {
+      const user_id=await showPicture.id
+      console.log(user_id)
+      const response = await axios.get('/api/building/admin+id', {
         headers: {
           "ngrok-skip-browser-warning": "69420"
         }
       });
-
       const data = response.data.data;
-
+      console.log(data)
       const BuildingsUploaded = data.map(building => {
         const dateofpost = building.dateofpost;
         const id = building.id;
@@ -33,10 +66,12 @@ const UploadedPage =() => {
         const type = building.type;
         const zipcode = building.zipcode;
         const admin_id = building.admin_id;
-        return { id, adress, zipcode, city, type, dateofpost, admin_id};
+        const image=building.initial_image
+        return { id, adress, zipcode, city, type, dateofpost, admin_id, image};
       });
       setBuildings(BuildingsUploaded);
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error);
     }
   }
@@ -44,21 +79,21 @@ const UploadedPage =() => {
   const deleteBuilding= (id) => {
     axios.delete('/api/building/delete/'+id)
     .then(response => {
-console.log("building deleted")
-})
-.catch(error => {
-console.log(error);
-});
-  setBuildings(buildings.filter((building) => building.id !== id))
-
+    console.log("building deleted")
+    })
+    .catch(error => {
+    console.log(error);
+    });
+    setBuildings(buildings.filter((building) => building.id !== id))
   }
-
+ const content=showPicture.content
+  console.log(content)
 
   return(
 <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
         <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5 ">
           <Logo/>
-          <LogoutButton/>
+          <LogoutButton url={content} />
 </div>
 
 

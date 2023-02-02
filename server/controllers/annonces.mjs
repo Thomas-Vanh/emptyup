@@ -20,21 +20,23 @@ export const postAnnonces = async (req, res) => {
       // i added "unique" constraint to "content" in the table like that it will check automaticly if the announcement is already in the database
       return res.status(400).send({ error: "annonce already exist" });
     }
-    console.error(error)
-    res.status(500).json({error : "server error"})
+    console.error(error);
+    res.status(500).json({ error: "server error" });
   }
 };
 
 export const getAllAnnonces = async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM annonces");
+    const result = await pool.query(
+      "SELECT annonces.id, annonces.content, annonces.date, annonces.subject, annonces.city, users.username, users.profilpicture_url FROM annonces LEFT JOIN users ON annonces.user_id = users.id"
+    );
 
     if (result.rows.length === 0) {
       return res.status(400).json({ message: "No data to be displayed" });
     }
-    return res.status(200).json({data : result.rows} );
+    return res.status(200).json({ data: result.rows });
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(500).send({ error: "server error" });
   }
 };
@@ -53,20 +55,21 @@ export const getOneAnnonce = async (req, res) => {
     }
     return res.status(200).json(query.rows);
   } catch (error) {
-    console.error(error)
+    console.error(error);
     return res.status(500).send({ error: "Internal server error" });
   }
 };
 
 export const deleteAnnonce = async (req, res) => {
   const id = req.params.id;
-  const user_id = req.userId   /// req.userId quand middleware
+  const user_id = req.userId; /// req.userId quand middleware
   const verif = await pool.query("SELECT user_id from annonces where id = $1", [
     id,
   ]);
-  if (verif.rows[0].user_id !== user_id) {                    /// l'activer que quand middleware auth ok
+  if (verif.rows[0].user_id !== user_id) {
+    /// l'activer que quand middleware auth ok
     res.status(400).send({ info: "not authorized" });
-  }                                            
+  }
   try {
     const result = await pool.query("SELECT * FROM annonces WHERE id = $1", [
       id,
@@ -79,7 +82,7 @@ export const deleteAnnonce = async (req, res) => {
       .status(200)
       .send({ message: "announcement deleted successfully" });
   } catch (error) {
-    console.error(error)
+    console.error(error);
     return res.status(500).send({ error: "Internal server error" });
   }
 };
@@ -96,7 +99,7 @@ export const updateAnnonce = async (req, res) => {
     ]);
     return res.statu(200).send("announcement modified");
   } catch (error) {
-    console.error(error)
-    return res.status(500).json({error : "server error!"})
+    console.error(error);
+    return res.status(500).json({ error: "server error!" });
   }
 };

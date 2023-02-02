@@ -80,10 +80,11 @@ const BuildingPage = () => {
       console.log(dat)
       const newComments = dat.map((comment) => {
         const content = comment.content;
-        const date = comment.date;
         const id = comment.id;
-        const user_id = comment.user_id;
-        return { id, content, date, user_id };
+        const date = comment.date;
+        const user_id=comment.user_id
+        const building_id=comment.building_id
+        return { id, content, building_id, user_id, date};
       });
       setComments(newComments);
     } catch (error) {
@@ -177,6 +178,16 @@ const BuildingPage = () => {
                 onChange={(e) => setNewComment(e.target.value)}
               />
             </div>
+          </div>
+        )}
+      </div>
+      <div className="w-1/2 h-full flex flex-col">
+      <ul className=" shadow-inner h-4/6 box-border bg-slate-50 w-11/12  rounded-[25px] p-3 flex overflow-scroll flex-col items-start ">
+              {comments.map((comment) => (<Comment info={comment} key={comment.id}/>
+              ))}
+            </ul>
+        <form className="p-3 mt-4 flex justify-between box-border flex-col items-center border-dotted border-3 border border-black rounded-[25px] h-2/6 w-11/12" action="submit" onSubmit={handleSubmit}>
+          <div className=" w-full box-border flex pb-2">
 
             <PostButton type="submit" />
           </form>
