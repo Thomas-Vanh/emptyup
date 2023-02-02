@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import Heart from "../assets/heart.svg";
 import Megaphone from "../assets/Megaphone.svg";
 import MessageIcon from "../assets/MessageIcon.svg";
@@ -14,39 +14,37 @@ import NoButton from "../components/NoButton"
 import DownloadPicture from "../components/DownloadPicture"
 import axios from "axios";
 
-const Username="Roro68"
-
 const ProfilePage = () => {
   const [modalActive, setModalActive] = useState(false);
   const [modalActiveYes, setModalActiveYes] = useState(false);
   const [showPicture, setshowPicture] = useState("");
+  const navigate = useNavigate();
 
-useEffect(() => {
-req();
-}, [])
 
-const req = async () => {
-try {
-    const response = await axios.get("api/user/profil/" , {
+  useEffect(() => {
+    req();
+  }, [])
+
+  const req = async () => {
+    try {
+      const response = await axios.get("api/user/profile", {
             headers: {
             "ngrok-skip-browser-warning": "69420"
             }
           });
-    console.log (response)
-    //const dat = response.data.data
-    //const newPicture = dat.map(picture => {
-      //const content = picture.value;
-     // const id = picture.id;
-    //  return { id, content};
-     // });
-   // setshowPicture(newPicture)
+      const dat = response.data.data
+      const newPicture =  {
+        content : dat.profilpicture_url,
+        id : dat.id,
+        username : dat.username,
+      };
+      setshowPicture(newPicture)
+
     }
-
-catch (error) {
-console.log(error);
-}
-}
-
+    catch (error) {
+    console.log(error);
+    }
+  }
 
   const onClickYes=() => {
     setModalActive(false);
@@ -56,25 +54,29 @@ console.log(error);
   const onClickNo=() => {
   }
 
+  const username=showPicture.username
+  const content=showPicture.content
+const id=showPicture.id
+console.log(id)
   return (
 
       <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
         <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5 ">
           <Logo/>
-          <LogoutButton/>
+          <LogoutButton url={content} />
         </div>
 
-        <h3 className="font-custom1 border-box cursor-default text-black box-border h-1/6 font-bold text-5xl flex items-center justify-center">
-         WELCOME {Username}
+        <h3 className="font-custom1 border-box cursor-default uppercase text-black box-border h-1/6 font-bold text-5xl flex items-center justify-center">
+         WELCOME {username}
         </h3>
 
 
         <div className="flex justify-between h-4/6 border-box  items-center">
           <div className="h-full w-1/2 flex flex-col  justify-center ">
             <div className=" w-full h-full flex justify-around items-center">
-              <DownloadPicture/>
-              <div className="h-72 w-72 border shadow overflow:hidden rounded-full truncate ">
-                <img src= {showPicture}  className=" scale-100  origin-top font-Custom1" />
+              <DownloadPicture />
+              <div className="h-full flex flex-col justify-center ">
+                <img src= {content}  className=" origin-center rounded-full  font-Custom1" />
               </div>
 
             </div>
@@ -108,7 +110,7 @@ console.log(error);
             </NavLink>
 
             <NavLink to="/uploaded" className="">
-              <button className="border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
+              <button onClick={() => navigate(`/uploaded/${id}`)} className="border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
                 <p className="text-sm  "> SEE YOUR</p>
                 <img src={uploadpicto} alt="upload" className="flex box-border" style={{ height: '30px', marginTop :'2px'}}/>
                 <h4 className="text-2xl  "> UPLOADED  </h4>

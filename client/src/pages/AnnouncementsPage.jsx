@@ -15,14 +15,43 @@ import Logo from "../components/Logo"
 import SearchButton from "../components/SearchButton"
 
 
-const Username="Roro68"
-
-
 const AnnoucementsPage =() => {
 const [posts, setPosts] = useState([]);
 const [newPost, setNewPost] = useState("")
 const [newSubject, setNewSubject] = useState("")
 const [newCity, setNewCity] = useState("")
+const [showPicture, setshowPicture] = useState("");
+
+
+
+
+useEffect(() => {
+getPicture();
+}, [])
+
+
+const getPicture = async () => {
+try {
+    const response = await axios.get("api/user/profile" , {
+            headers: {
+            "ngrok-skip-browser-warning": "69420"
+            }
+          });
+    console.log (response)
+    const dat = response.data.data
+    const newPicture =  {
+     content : dat.profilpicture_url,
+     id : dat.id,
+      username : dat.username,
+      };
+   setshowPicture(newPicture)
+    }
+
+catch (error) {
+console.log(error);
+}
+}
+
 const apiUrl = '/api/annonces';
 
 useEffect(() => {
@@ -45,7 +74,9 @@ const date = post.date;
 const id = post.id;
 const user_id=post.user_id
 const city= post.city
-return { id, content, subject, date, user_id, city};
+const username=post.username
+const profilePicture=post.profilpicture_url
+return { id, content, subject, date, user_id, city, username,profilePicture};
 });
 setPosts(newPosts)
 }
@@ -85,7 +116,8 @@ axios.post(apiUrl+'/add', postToAdd)
    });
 }
 
-
+const content=showPicture.content
+  console.log(content)
 
 
 
@@ -93,8 +125,8 @@ return (
       <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
         <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5">
           <Logo/>
-          <LogoutButton/>
-        </div>
+         <LogoutButton url={content} />
+                 </div>
 
      	<h3 className="h-1/12 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
 			Posts
