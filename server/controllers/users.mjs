@@ -85,7 +85,7 @@ export const login = async (req, res) => {
 
 export const uploadProfilPicture = async (req, res) => {
   const file = await req.files.image;
-  console.log(file);
+  
   if (!file) {
     res.status(500).json({ error: "file missing" });
   }
@@ -108,16 +108,18 @@ export const uploadProfilPicture = async (req, res) => {
 };
 
 export const getInfoUsers = async (req, res) => {
-  const user_id = req.userId //=>> not usefull since the user is auth by a token 
+  const user_id = req.userId  
   try {
     const userInfo = await pool.query(
-      "SELECT username, profilpicture_url FROM users where id =$1",
+      "SELECT id, username, profilpicture_url FROM users where id =$1",
       [user_id]
     );
     if (!userInfo.rows[0]) {
       return res.status(404).json({ error: "user not found" });
     }
-    return res.json({ data: userInfo.rows[0] });
+    
+    return res
+    .json({ data: userInfo.rows[0]});
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "server error" });
@@ -126,7 +128,7 @@ export const getInfoUsers = async (req, res) => {
 
 
 export const unsubscribeUser = async (req, res) => {
-  const id = req.params.id;
+  const id = req.userId;
   try {
     const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
     if (result.rows.length === 0) {
@@ -138,6 +140,8 @@ export const unsubscribeUser = async (req, res) => {
     res.status(500).send({ error: "Internal server error" });
   }
 };
+
+
 
 export const logout = (req, res) => {
   return res
