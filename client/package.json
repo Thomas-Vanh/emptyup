@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "https://46c7-212-239-164-17.eu.ngrok.io/",
+  "proxy": "https://0503-84-199-109-85.eu.ngrok.io",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",

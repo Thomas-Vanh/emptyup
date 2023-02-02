@@ -34,11 +34,11 @@ const FormLog1 = () => {
         setIsSubmitting1(false);
       });
 
-      console.log(inputRefEmail.current.value);
+    console.log(inputRefEmail.current.value);
     console.log(inputRefPassword.current.value);
-    navigate("/profile/"+user_id);
+    navigate("/profile");
     setIsSubmitting1(true);
-    navigate("/profile/"+user_id);
+    navigate("/profile");
   };
 
   return (

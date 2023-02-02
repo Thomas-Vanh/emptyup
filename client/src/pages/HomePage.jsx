@@ -58,7 +58,7 @@ const HomePage = () => {
 
   const getAllBuildings = async () => {
     try {
-      const response = await axios.get("/api/buildings", {
+      const response = await axios.get("/api/building", {
         headers: {
           "ngrok-skip-browser-warning": "69420",
         },
