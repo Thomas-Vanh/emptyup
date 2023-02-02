@@ -63,16 +63,16 @@ server.post("/api/user/register", register);
 server.post("/api/user/login", login);
 server.get("/api/user/profile",jwtAuthentification, getInfoUsers);
 server.post("/api/user/profilepicture",jwtAuthentification, uploadProfilPicture);
-server.delete("/api/user/unsubscribe/:id",jwtAuthentification,unsubscribeUser);
+server.delete("/api/user/unsubscribe",jwtAuthentification,unsubscribeUser);
 server.get("/api/user/logout", jwtAuthentification, logout);
 server.get("/api/user/mybuildings/:id", getUserAdminBuildings);
 
 // buildings related endpoints
 server.post("/api/addbuilding", jwtAuthentification, addBuilding);
 server.get("/api/building", getBuildings);
-server.get("/api/building", getBuildingby);
+server.get("/api/building/buildingby", getBuildingby);
 server.get("/api/building/:id", getOneBuilding);
-server.get("/api/building/:id", jwtAuthentification, getUserAdminBuildings);
+server.get("/api/building/admin",jwtAuthentification,  getUserAdminBuildings);
 server.delete("/api/building/delete/:id", deleteBuilding);
 server.get('/api/building/zipcode/:zipcode', getZipcode)
 server.get('/api/building/city/:city', getCity)
@@ -80,14 +80,14 @@ server.get('/api/building/adress/:adress', getAdress)
 server.get('/api/building/type/:type', getType)
 
 // images related endpoints
-server.post("/api/building/uploadimage", uploadImage);
+server.post("/api/building/uploadimage",jwtAuthentification, uploadImage);
 
 // announcement
-server.post("/api/annonces/add", postAnnonces);
-server.get("/api/annonces", getAllAnnonces);
-server.get("/api/annonces/:id", getOneAnnonce);
-server.put("/api/annonces/update", updateAnnonce);
-server.delete("/api/annonces/:id", deleteAnnonce);
+server.post("/api/annonces/add", jwtAuthentification ,postAnnonces);
+server.get("/api/annonces", jwtAuthentification, getAllAnnonces);
+server.get("/api/annonces/:id", jwtAuthentification, getOneAnnonce);
+server.put("/api/annonces/update", jwtAuthentification ,updateAnnonce);
+server.delete("/api/annonces/:id", jwtAuthentification ,deleteAnnonce);
 
 // comments
 
