@@ -21,7 +21,7 @@ export const getUserAdminBuildings = async (req, res) => {
 };
 
 
-//********** GET ALL the buildings  */
+////////////// GET ALL the buildings  */
 export const getBuildings = async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM buildings");
@@ -36,7 +36,7 @@ export const getBuildings = async (req, res) => {
 };
 
 
-///******************* Get building from his ID */
+//////////// Get building from his ID */
 export const getOneBuilding = async (req, res) => {
   const building_id = req.params.id;
   try {
@@ -53,7 +53,7 @@ export const getOneBuilding = async (req, res) => {
   }
 };
 
-////************************** retrieve building.s by infos in the body (filtering) */
+////////////// retrieve building.s by infos in the body (filtering) */
 
 export const getBuildingby = async (req, res) => {
   const { adress, zipcode, city, type } = req.body;
@@ -73,7 +73,7 @@ export const getBuildingby = async (req, res) => {
 };
 
 
-//get one building by zipcode***********************************************************
+//get one building by zipcode///////////////////
 export const getZipcode = async (req, res) => {
   try {
     const building = await pool.query(
@@ -92,7 +92,7 @@ export const getZipcode = async (req, res) => {
 };
 
 
-// get one building by city**************************************************************
+// get one building by city //////////////////
 export const getCity = async (req, res) => {
   try {
     const building = await pool.query(
@@ -110,7 +110,7 @@ export const getCity = async (req, res) => {
   }
 };
 
-//get one building by adress need to find a way to retrieve full adresses
+/////////////get one building by adress need to find a way to retrieve full adresses
 export const getAdress = async (req, res) => {
   try {
     const building = await pool.query(
@@ -146,7 +146,7 @@ export const getType = async (req, res) => {
   }
 };
 
-///************************************* ADD a building in the database */
+////////////////////// ADD a building in the database */
 export const addBuilding = async (req, res) => {
   const { adress, zipcode, city, type, lat, lon } = req.body;
   const file = req.files.image;
@@ -185,7 +185,7 @@ export const addBuilding = async (req, res) => {
   }
 };
 
-/////////*************** UPDATE infos of a building  */
+////////////////// UPDATE infos of a building  */
 export const updateBuilding = async (req, res) => {
   try {
     const id = req.params;
@@ -201,7 +201,7 @@ export const updateBuilding = async (req, res) => {
   }
 };
 
-//////***************** delete a building from the database  */
+////////////////// delete a building from the database  */
 export const deleteBuilding = async (req, res) => {
   const id = req.params.id;
   const admin_id = req.userId;
