@@ -7,7 +7,7 @@ import Megaphone from "../assets/Megaphone.svg";
 import UploadLogo from "../components/UploadLogo";
 import SearchButton from "../components/SearchButton";
 import PostButton from "../components/PostButton";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, NavLink, useParams } from "react-router-dom";
 import Comment from "../components/Comment";
 
 const BuildingPage = () => {
@@ -132,7 +132,7 @@ const BuildingPage = () => {
     <div className="font-custom1  h-screen w-screen flex flex-col m-0 p-0">
       <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5">
         <Logo />
-        <LogoutButton />
+
       </div>
       <h3 className="h-1/6 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
         SPACE TO EMPTY UP

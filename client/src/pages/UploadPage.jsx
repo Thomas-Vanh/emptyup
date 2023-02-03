@@ -12,6 +12,7 @@ import { NavLink } from 'react-router-dom'
 import Logo from "../components/Logo";
 import LogoutButton from "../components/LogoutButton";
 import Logonotext from "../assets/logonotext.png";
+import { useNavigate } from "react-router-dom";
 
 const UploadPage = () => {
 
@@ -23,7 +24,7 @@ const UploadPage = () => {
   const [coordinates, setCoordinates] = useState({ lat: 0, lon: 0 });
   //const [marker, setMarker] = useState([]);
   const [popup, setPopup] = useState(false);
-
+const navigate=useNavigate()
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -70,11 +71,26 @@ const UploadPage = () => {
       });
 
   };
+
+   const logout = async () => {
+      try {
+        const response = await axios.get("api/user/logout", {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
+        console.log(response)
+        navigate("/")
+      }
+      catch (error) {
+      console.log(error);
+      }
+    };
   return (
     <div className="font-custom1  h-screen w-screen flex flex-col m-0 p-0">
       <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5">
         <Logo />
-        <LogoutButton/>
+        <LogoutButton onClick={logout}/>
       </div>
 
         <h3 className="h-1/6 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
@@ -148,9 +164,10 @@ const UploadPage = () => {
       <Button className="text-xl rounded-2xl p-3 mt-28 border "type="submit">Add a building</Button>
     </Form>
 
-    <div className="w-1/2 h-1/2 flex box-border  border ">
+
+    <div className="w-1/3 h-4/6 mr-20 rounded-full flex box-border overflow:hidden border truncate ">
       {coordinates.lat !== 0 && coordinates.lon !== 0 && (
-        <LeafletContainer className="w-1/2 h-1/2" center={[coordinates.lat, coordinates.lon]} zoom={13}>
+        <LeafletContainer className="object-cover h-full w-full font-Custom1" center={[coordinates.lat, coordinates.lon]} zoom={13}>
           <LeafletMap coordinates={coordinates} onClick={() => setPopup(true)}>
             <Popup className="popup">
               {image && (
