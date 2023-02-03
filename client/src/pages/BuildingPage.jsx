@@ -9,7 +9,6 @@ import SearchButton from "../components/SearchButton";
 import PostButton from "../components/PostButton";
 import { NavLink, useParams } from "react-router-dom";
 import Comment from "../components/Comment";
-import { faBuildingCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const BuildingPage = () => {
   const [comments, setComments] = useState([]);
@@ -31,7 +30,6 @@ const BuildingPage = () => {
       });
 
       const buildingData = response.data.data[0];
-      console.log(buildingData);
       const date = new Date(buildingData.dateofpost);
       const options = { year: "numeric", month: "2-digit", day: "2-digit" };
       const dateofpost = date
@@ -167,9 +165,9 @@ const BuildingPage = () => {
             action="submit"
             onSubmit={handleSubmit}
           >
-            <div className=" w-full box-border flex pb-2"></div>
+            {/* <div className=" w-full box-border flex pb-2"></div>
 
-            <div className="box-border shadow-inner w-11/12 h-3/5     ">
+            <div className="box-border shadow-inner w-11/12 h-3/5     "> */}
               <input
                 className="  h-full w-full bg-slate-50 "
                 type="text"
@@ -177,22 +175,12 @@ const BuildingPage = () => {
                 placeholder="You can wrote your comment here!"
                 onChange={(e) => setNewComment(e.target.value)}
               />
+               <PostButton type="submit" />
+               </form>
             </div>
           </div>
-        )}
-      </div>
-      <div className="w-1/2 h-full flex flex-col">
-      <ul className=" shadow-inner h-4/6 box-border bg-slate-50 w-11/12  rounded-[25px] p-3 flex overflow-scroll flex-col items-start ">
-              {comments.map((comment) => (<Comment info={comment} key={comment.id}/>
-              ))}
-            </ul>
-        <form className="p-3 mt-4 flex justify-between box-border flex-col items-center border-dotted border-3 border border-black rounded-[25px] h-2/6 w-11/12" action="submit" onSubmit={handleSubmit}>
-          <div className=" w-full box-border flex pb-2">
-
-            <PostButton type="submit" />
-          </form>
-        </div>
-      </div>
+      
+   
 
       <footer className="h-1/12  pt-4 flex justify-center">
         <NavLink to="/upload" className=" ">

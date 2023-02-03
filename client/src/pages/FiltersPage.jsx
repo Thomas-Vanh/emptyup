@@ -12,9 +12,9 @@ const FiltersPage = () => {
     getAllBuildings();
   }, []);
 
-  useEffect(() => {
-    console.log(buildings);
-  }, [buildings]);
+  // useEffect(() => {
+  //   console.log(buildings);
+  // }, [buildings]);
 
   const inputRefCity = useRef();
   const inputRefZipcode = useRef();
@@ -56,7 +56,7 @@ const FiltersPage = () => {
         };
       });
       setBuildings(buildingsAll);
-      console.log(buildings)
+      // console.log(buildings)
     } catch (error) {
       console.log(error);
     }
@@ -68,27 +68,31 @@ const FiltersPage = () => {
     const zipcode = inputRefZipcode.current.value;
     const type = inputRefType.current.value;
 
+    const data = {
+      zipcode: inputRefZipcode.current.value
+    }
+
     try {
-      const response = await axios.get(`/api/building`, {
+      const response = await axios.get("/api/building/buildingby", data, {
         headers: {
           "ngrok-skip-browser-warning": "69420",
         },
       });
 
-      const buildingsData = response.data;
+      const buildingsDataFiltered = response;
+      console.log(buildingsDataFiltered)
      
-      const buildingsAll = buildingsData.map((building) => {
-        const dateofpost = building.dateofpost;
-        const id = building.id;
-        const adress = building.adress;
-        const city = building.city;
-        const type = building.type;
-        const zipcode = building.zipcode;
-        const admin_id = building.admin_id;
-        const position = building.position;
-        const lat = building.lat;
-        const lon = building.lon;
-        const initial_image = building.initial_image;
+      const buildingsFilt = buildingsDataFiltered.map((buildingFilt) => {
+        const dateofpost = buildingFilt.dateofpost;
+        const id = buildingFilt.id;
+        const adress = buildingFilt.adress;
+        const city = buildingFilt.city;
+        const type = buildingFilt.type;
+        const zipcode = buildingFilt.zipcode;
+        const admin_id = buildingFilt.admin_id;
+        const lat = buildingFilt.lat;
+        const lon = buildingFilt.lon;
+        const initial_image = buildingFilt.initial_image;
         return {
           id,
           adress,
@@ -102,7 +106,7 @@ const FiltersPage = () => {
           initial_image,
         };
       });
-      setBuildings(buildingsAll);
+      setBuildings(buildingsFilt);
     } catch (error) {
       console.log(error);
     }
