@@ -128,7 +128,7 @@ const BuildingPage = () => {
         <LogoutButton />
       </div>
       <h3 className="h-1/6 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
-        SPACE # {building.building_id}
+        SPACE TO EMPTY UP
       </h3>
 
       <div className="h-4/6 flex box-border items-center justify-around rounded-[25px] ">
