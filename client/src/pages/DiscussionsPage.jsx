@@ -24,32 +24,30 @@ const [newDiscussion, setNewDiscussion] = useState("")
 const [newUserName, setNewUserName] = useState("")
 const apiUrl = '/api/annonces';
 
-// useEffect(() => {
-// req();
-// }, [])
+useEffect(() => {
+req();
+ }, [])
 
-// const req = async () => {
-// try {
-// const response = await axios.get(apiUrl, {
-//         headers: {
-//           "ngrok-skip-browser-warning": "69420"
-//         }
-//       });
-// console.log (response)
-// const dat = response.data.data
-// const newDiscussions = dat.map(discussion => {
-// const content = discussion.content;
-// const userName =discussion.userName
-// const id = discussion.id;
-// const user_id=discussion.user_id
-// return { userName, id, content, user_id};
-// });
-// setDiscussions(newDiscussions)
-// }
-// catch (error) {
-// console.log(error);
-// }
-// }
+ const req = async () => {
+ try {
+ const response = await axios.get("/api/discussion", {
+        headers: {
+          "ngrok-skip-browser-warning": "69420"
+       }
+       });
+ console.log (response)
+ const dat = response.data.data
+ const newDiscussions = dat.map(discussion => {
+ const userName =discussion.userName
+ const id = discussion.id;
+
+ return { userName, id};
+ });
+ setDiscussions(newDiscussions)
+ }
+ catch (error) {
+console.log(error); }
+ }
 
 const handleSubmit = (event) => {
 event.preventDefault()
@@ -68,6 +66,7 @@ axios.post("/api/discussion", discussionToAdd)
    .catch(error => {
       console.log(error);
    });
+
 
 }
 
