@@ -104,6 +104,6 @@ server.get("/building/api/building/:id/comments", getComments);
 server.post("/api/discussion",jwtAuthentification, createDiscussion)
 server.get("/api/discussion", getDiscussion )
 
-server.listen(5500, () => {
+server.listen(3001, () => {
   console.log("app is runing");
 });
