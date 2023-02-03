@@ -68,108 +68,84 @@ const ProfilePage = () => {
       </div>
 
 
-
-      <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
-        <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5 ">
-          <Logo/>
-          <LogoutButton url={content} />
-        </div>
-
-        <h3 className="font-custom1 border-box cursor-default uppercase text-black box-border h-1/6 font-bold text-5xl flex items-center justify-center">
+      <h3 className="font-custom1 border-box cursor-default uppercase text-black box-border h-1/6 font-bold text-5xl flex items-center justify-center">
          WELCOME {username}
-        </h3>
+      </h3>
 
 
-        <div className="flex justify-between h-4/6 border-box  items-center">
-          <div className="h-full w-1/2 flex flex-col  justify-center ">
-            <div className=" w-full h-full flex justify-around items-center">
-              <DownloadPicture />
-              <div className="h-72 w-72 border flex  shadow overflow:hidden rounded-full truncate">
-                <img src= {content} className=" object-cover h-full w-full  font-Custom1" />
-              </div>
+      <div className="flex w-full justify-between h-4/6 border-box  ">
+        <div className="h-full w-1/2 flex   justify-center ">
 
-
-            </div>
-            <div className="h-1/12 p-0 m-0 box-border flex">
-          <UnsubscribeButton setActive={setModalActive} />
-
-          <Modal active={modalActive} setActive={setModalActive}>
-            <p className="flex justify-center py-5 text-base">Are you sure you want to unsubscribe from EmptyUp ?
-            </p>
-            <div className="flex px-10 py-5 justify-around">
-              <YesButton onClick={onClickYes}/>
-              <NoButton onClick={onClickNo}/>
-            </div>
+          <div className=" w-full h-11/12 flex justify-around items-center">
+            <DownloadPicture />
+            <div className="h-72 w-72 border flex  shadow overflow:hidden rounded-full truncate">
+            <img src= {content} className=" object-cover h-full w-full  font-Custom1" />
           </div>
+
           <div className="h-1/12 p-0 m-0 box-border flex">
             <UnsubscribeButton setActive={setModalActive} />
-
             <Modal active={modalActive} setActive={setModalActive}>
-              <p className="flex justify-center py-5 text-base">
-                Are you sure you want to unsubscribe from EmptyUp ?
-              </p>
-              <div className="flex px-10 py-5 justify-around">
-                <YesButton onClick={onClickYes} />
-                <NoButton onClick={onClickNo} />
-              </div>
+                <p className="flex justify-center py-5 text-base">Are you sure you want to unsubscribe from EmptyUp ?
+                </p>
+                <div className="flex px-10 py-5 justify-around">
+                  <YesButton onClick={onClickYes}/>
+                  <NoButton onClick={onClickNo}/>
+                </div>
             </Modal>
+          </div>
 
-          <div className="flex h-full w-1/2 flex-wrap justify-between px-28 pb-10">
-
+        </div>
+</div>
+        <div className="flex h-full w-1/2 flex-wrap px-10  justify-between">
             <NavLink to="/favorites" className="">
-              <button className=" border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
-                <p className="text-sm  "> SEE YOUR</p>
-                <img src={Heart} alt="back" className="flex box-border" style={{ height: '30px', marginTop :'2px'}}/>
-                <h4 className="text-2xl  "> FAVORITES  </h4>
-                <p className="text-sm "> SPACES </p>
-                </button>
+                <button className=" border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
+                  <p className="text-sm  "> SEE YOUR</p>
+                  <img src={Heart} alt="back" className="flex box-border" style={{ height: '30px', marginTop :'2px'}}/>
+                  <h4 className="text-2xl  "> FAVORITES  </h4>
+                  <p className="text-sm "> SPACES </p>
+                  </button>
             </NavLink>
 
 
-              <button onClick={() => navigate(`/uploaded`)} className="border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
+            <button onClick={() => navigate(`/uploaded`)} className="border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
                 <p className="text-sm  "> SEE YOUR</p>
                 <img src={uploadpicto} alt="upload" className="flex box-border" style={{ height: '30px', marginTop :'2px'}}/>
                 <h4 className="text-2xl  "> UPLOADED  </h4>
                 <p className="text-sm  "> SPACES </p>
-              </button>
+            </button>
 
 
             <NavLink to="/announcements" className="">
-              <button className=" border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
-                <p className="text-sm "> SEE THE</p>
-                <img src={Megaphone} alt="megaphone" className="flex box-border" style={{ height: '30px', marginTop :'2px'}}/>
-                <h4 className="text-2xl "> POSTS  </h4>
-                <p className="text-sm text-left  ">OF COMMUNITY </p>
-              </button>
+                <button className=" border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
+                  <p className="text-sm "> SEE THE</p>
+                  <img src={Megaphone} alt="megaphone" className="flex box-border" style={{ height: '30px', marginTop :'2px'}}/>
+                  <h4 className="text-2xl "> POSTS  </h4>
+                  <p className="text-sm text-left  ">OF COMMUNITY </p>
+                </button>
             </NavLink>
 
             <NavLink to="/discussions">
-              <button className=" border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
-                <p className="text-sm"> SEE YOUR
-                </p>
-                <img src={MessageIcon} alt="message" className="flex box-border" style={{height: '30px', marginTop :'2px'}}/>
-                <h4 className="text-2xl "> DISCUSSIONS
-                </h4>
-                <p className="text-sm text-left">WITH COMMUNITY
-                </p>
-              </button>
+                <button className=" border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
+                  <p className="text-sm"> SEE YOUR
+                  </p>
+                  <img src={MessageIcon} alt="message" className="flex box-border" style={{height: '30px', marginTop :'2px'}}/>
+                  <h4 className="text-2xl "> DISCUSSIONS
+                  </h4>
+                  <p className="text-sm text-left">WITH COMMUNITY
+                  </p>
+                </button>
             </NavLink>
-
-            <Modal active={modalActiveYes} setActive={setModalActiveYes}>
-              <p className="flex justify-center py-5 text-base">
-                You have sucessfully unsubscribe from EmptyUp!{" "}
-              </p>
-            </Modal>
           </div>
+
         </div>
 
 
-      <footer className="h-1/12 pt-4 box-border flex justify-center">
-        <NavLink to="/upload">
-          <UploadLogo />
-        </NavLink>
-      </footer>
-    </div>
+        <footer className="h-1/12 pt-4 box-border flex justify-center">
+          <NavLink to="/upload">
+            <UploadLogo />
+          </NavLink>
+        </footer>
+      </div>
   );
 };
 
