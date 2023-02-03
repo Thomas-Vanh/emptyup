@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+  front:
+    image: emptyup-front
+    container_name: emptyup-front
+    build:
+      dockerfile: ./docker/front/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+    - ./client:/var/www/emptyup
+    - /var/www/emptyup/node_modules
+  back:
+    image: emptyup-back
+    container_name: emptyup-back
+    build:
+      dockerfile: ./docker/back/Dockerfile
+    restart: always
+    ports:
+      - 3001:3000
+    volumes:
+    - ./server:/var/www/emptyup
+    - /var/www/emptyup/node_modules
+
+  db:
+   image: empty_up_db
+   container_name: empty_up_db
+   restart: always
+   ports:
+      - 5432:5432
+   build:
+      dockerfile: ./docker/db/Dockerfile
