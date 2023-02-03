@@ -97,13 +97,13 @@ server.delete("/api/annonces/:id", jwtAuthentification ,deleteAnnonce);
 // comments
 
 server.post("/api/building/:id/postcomment",jwtAuthentification, postComment);
-server.get("/building/api/building/:id/comments",jwtAuthentification, getComments);
+server.get("/building/api/building/:id/comments", getComments);
 
 // discussions 
 
 server.post("/api/discussion",jwtAuthentification, createDiscussion)
 server.get("/api/discussion", getDiscussion )
 
-server.listen(5500, () => {
+server.listen(3001, () => {
   console.log("app is runing");
 });
