@@ -30,13 +30,13 @@ services:
    container_name: emptyup-db
    restart: always
    environment:
-    POSTGRES_DB: postgres
-    POSTGRES_USER: empty_up_db_admin
-    POSTGRES_PASSWORD: K}63z-4NraxU~8
+      POSTGRES_DB: empty_up_db
+      POSTGRES_USER: empty_up_db_admin
+      POSTGRES_PASSWORD: K}63z-4NraxU~8
    ports:
       - 5432:5432
    volumes:
-    - ./docker/db/db-dump/:/docker-entrypoint-initdb.d/
+    - ./docker/db/db-dump/schemaDb.sql:/docker-entrypoint-initdb.d/create_tables.sql
 
   pgadmin:
     container_name: pgadmin
