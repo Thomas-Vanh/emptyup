@@ -23,10 +23,11 @@ services:
     volumes:
     - ./server:/var/www/emptyup
     - /var/www/emptyup/node_modules
+    - ./docker/back/.env:/var/www/emptyup/.env
 
   db:
    image: empty_up_db
-   container_name: empty_up_db
+   container_name: emptyup-db
    restart: always
    ports:
       - 5432:5432
