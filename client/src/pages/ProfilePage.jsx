@@ -1,11 +1,11 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from "react-router-dom";
 import Heart from "../assets/heart.svg";
 import Megaphone from "../assets/Megaphone.svg";
 import MessageIcon from "../assets/MessageIcon.svg";
-import uploadpicto from "../assets/uploadpicto.png"
-import LogoutButton from "../components/LogoutButton"
+import uploadpicto from "../assets/uploadpicto.png";
+import LogoutButton from "../components/LogoutButton";
 import Logo from "../components/Logo";
-import UploadLogo from "../components/UploadLogo"
+import UploadLogo from "../components/UploadLogo";
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/Modal";
 import {useParams } from "react-router-dom";
@@ -21,25 +21,23 @@ const ProfilePage = () => {
   const [showPicture, setshowPicture] = useState("");
   const navigate = useNavigate();
 
-
   useEffect(() => {
     req();
-  }, [])
+  }, []);
 
   const req = async () => {
     try {
       const response = await axios.get("api/user/profile", {
-            headers: {
-            "ngrok-skip-browser-warning": "69420"
-            }
-          });
-      const dat = response.data.data
-      const newPicture =  {
-        content : dat.profilpicture_url,
-        id : dat.id,
-        username : dat.username,
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+        },
+      });
+      const dat = response.data.data;
+      const newPicture = {
+        content: dat.profilpicture_url,
+        id: dat.id,
+        username: dat.username,
       };
-
       newPicture.onload = () =>
       setshowPicture(newPicture)
 
@@ -47,23 +45,29 @@ const ProfilePage = () => {
     catch (error) {
     console.log(error);
     }
-  }
+  };
 
-  const onClickYes=() => {
+  const onClickYes = () => {
     setModalActive(false);
-    setModalActiveYes(true)
-  }
+    setModalActiveYes(true);
+  };
 
-  const onClickNo=() => {
-  }
+  const onClickNo = () => {};
+
 
   const username=showPicture.username
   const content=showPicture.content
   const id=showPicture.id
 
   console.log(id)
-
   return (
+    <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
+      <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5 ">
+        <Logo />
+        <LogoutButton url={content} />
+      </div>
+
+
 
       <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
         <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5 ">
@@ -96,13 +100,19 @@ const ProfilePage = () => {
               <YesButton onClick={onClickYes}/>
               <NoButton onClick={onClickNo}/>
             </div>
-          </Modal>
-
-          <Modal active={modalActiveYes} setActive={setModalActiveYes}>
-            <p className="flex justify-center py-5 text-base">You have sucessfully unsubscribe from EmptyUp! </p>
-          </Modal>
-        </div>
           </div>
+          <div className="h-1/12 p-0 m-0 box-border flex">
+            <UnsubscribeButton setActive={setModalActive} />
+
+            <Modal active={modalActive} setActive={setModalActive}>
+              <p className="flex justify-center py-5 text-base">
+                Are you sure you want to unsubscribe from EmptyUp ?
+              </p>
+              <div className="flex px-10 py-5 justify-around">
+                <YesButton onClick={onClickYes} />
+                <NoButton onClick={onClickNo} />
+              </div>
+            </Modal>
 
           <div className="flex h-full w-1/2 flex-wrap justify-between px-28 pb-10">
 
@@ -144,22 +154,23 @@ const ProfilePage = () => {
                 </p>
               </button>
             </NavLink>
-          </div>
 
+            <Modal active={modalActiveYes} setActive={setModalActiveYes}>
+              <p className="flex justify-center py-5 text-base">
+                You have sucessfully unsubscribe from EmptyUp!{" "}
+              </p>
+            </Modal>
+          </div>
         </div>
 
 
-        <footer className="h-1/12 pt-4 box-border flex justify-center">
-          <NavLink to="/upload">
-            <UploadLogo />
-          </NavLink>
-        </footer>
-      </div>
-        )
-    }
+      <footer className="h-1/12 pt-4 box-border flex justify-center">
+        <NavLink to="/upload">
+          <UploadLogo />
+        </NavLink>
+      </footer>
+    </div>
+  );
+};
 
-    export default ProfilePage
-
-
-
-
+export default ProfilePage;

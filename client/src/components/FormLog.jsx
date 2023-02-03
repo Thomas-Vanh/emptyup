@@ -43,7 +43,7 @@ const FormLog = () => {
           onSubmitHandler(event);
         }}
       >
-        <div className="inputDiv">
+        <div className="flex flex-col">
           <input
             type="text"
             placeholder="Enter the email"

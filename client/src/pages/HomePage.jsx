@@ -154,7 +154,7 @@ const HomePage = () => {
         </Modal>
 
         <Modal active={modalActiveLog} setActive={setModalActiveLog}>
-          <FormLog />
+          <FormLog/>
         </Modal>
         <Modal active={modalActiveReg} setActive={setModalActiveReg}>
           <FormReg

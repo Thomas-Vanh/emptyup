@@ -9,7 +9,6 @@ import SearchButton from "../components/SearchButton";
 import PostButton from "../components/PostButton";
 import { NavLink, useParams } from "react-router-dom";
 import Comment from "../components/Comment";
-import { faBuildingCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const BuildingPage = () => {
   const [comments, setComments] = useState([]);
@@ -31,7 +30,6 @@ const BuildingPage = () => {
       });
 
       const buildingData = response.data.data[0];
-      console.log(buildingData);
       const date = new Date(buildingData.dateofpost);
       const options = { year: "numeric", month: "2-digit", day: "2-digit" };
       const dateofpost = date
@@ -166,8 +164,9 @@ const BuildingPage = () => {
           <form
             className=" mt-4 flex justify-between   box-border flex-col items-center   h-2/6 w-11/12"
             action="submit"
+
             onSubmit={handleSubmit}>
-            <div className="box-border shadow-inner rounded-[15px] w-full h-4/5     ">
+            <div className="box-border shadow-inner rounded-[15px] w-full h-4/5">
               <input
                 className="  h-full w-full text-center rounded-[15px] bg-slate-50 "
                 type="text"
