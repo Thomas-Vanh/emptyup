@@ -97,7 +97,7 @@ server.delete("/api/annonces/:id", jwtAuthentification ,deleteAnnonce);
 // comments
 
 server.post("/api/building/:id/postcomment",jwtAuthentification, postComment);
-server.get("/building/api/building/:id/comments",jwtAuthentification, getComments);
+server.get("/building/api/building/:id/comments", getComments);
 
 // discussions 
 
