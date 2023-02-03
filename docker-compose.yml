@@ -30,20 +30,20 @@ services:
    container_name: emptyup-db
    restart: always
    environment:
-    POSTGRES_DB: empty_up_db
+    POSTGRES_DB: postgres
     POSTGRES_USER: empty_up_db_admin
     POSTGRES_PASSWORD: K}63z-4NraxU~8
    ports:
       - 5432:5432
    volumes:
-    - ./docker/db/db-dump/schemaDb.sql:/docker-entrypoint-initdb.d/dummy_dump.sql
+    - ./docker/db/db-dump/:/docker-entrypoint-initdb.d/
 
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: empty_up_db_admin
+      PGADMIN_DEFAULT_EMAIL: empty_up@gmail.com
       PGADMIN_DEFAULT_PASSWORD: K}63z-4NraxU~8
     ports:
-      - "5050:80"
+      - "5050:5050"
