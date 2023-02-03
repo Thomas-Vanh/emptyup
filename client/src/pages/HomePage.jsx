@@ -1,5 +1,5 @@
+import { NavLink } from "react-router-dom";
 import axios from "axios";
-import Navigation from "../components/Navigation";
 import UploadLogo from "../components/UploadLogo";
 import { LeafletContainer } from "../maps/leaflet-container";
 import { LeafletMap } from "../maps/leaflet-map";
@@ -11,8 +11,8 @@ import FormLog1 from "../components/FormLog1";
 import LoginButton from "../components/LoginButton";
 import RegisterButton from "../components/RegisterButton";
 import LoginPicto from "../components/LoginPicto";
-import Logo from "../components/Logo";
 import Search from "../components/Search";
+ import logonotext from '../assets/logonotext.png';
 
 const HomePage = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -98,9 +98,16 @@ const HomePage = () => {
 
   return (
     <div className="font-custom1  h-screen w-screen flex flex-col box-border m-0 p-0 ">
-      <div className="flex h-1/12 w-full box-border justify-between p-5 ">
-        <Search />
-        <Logo />
+      <div className="flex h-1/12 w-full box-border justify-between px-5 p-3 items-center ">
+        <NavLink className=" w-2/6" to="/filters" >
+          <Search />
+        </NavLink>
+         <div  className=" w-2/6 flex scale-150 justify-center items-center h-full box-border ml-4 text-l font-bold">
+          <p className="ml-2   font-bold font-custom2 cursor-default text-2xl text-left " alt="back to map">
+            Empty.up
+          </p>
+          <img src= {logonotext} alt="logo" className=" ml-2 h-5 " />
+        </div>
         <LoginPicto setActive={setModalActive1} />
         <Modal
           className="z-1"
