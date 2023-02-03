@@ -7,6 +7,7 @@ import axios from "axios";
 
 const FiltersPage = () => {
   const [buildings, setBuildings] = useState([]);
+  const [buildingsFilt, setBuildingsFilt] = useState([]);
 
   useEffect(() => {
     getAllBuildings();
@@ -68,21 +69,20 @@ const FiltersPage = () => {
     const zipcode = inputRefZipcode.current.value;
     const type = inputRefType.current.value;
 
-    const data = {
-      zipcode: inputRefZipcode.current.value
-    }
-
     try {
-      const response = await axios.get("/api/building/buildingby", data, {
-        headers: {
-          "ngrok-skip-browser-warning": "69420",
-        },
-      });
-
-      const buildingsDataFiltered = response;
-      console.log(buildingsDataFiltered)
+      if (city) {
+        const response = await axios.get(`/api/building/city/${city}`, {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });  
+        const buildingsDataFiltered = response.data;
+        setBuildingsFilt(buildingsDataFiltered)
+        console.log(buildingsDataFiltered)
+      }
+      
      
-      const buildingsFilt = buildingsDataFiltered.map((buildingFilt) => {
+      const buildingsFiltered = buildingsFilt.map((buildingFilt) => {
         const dateofpost = buildingFilt.dateofpost;
         const id = buildingFilt.id;
         const adress = buildingFilt.adress;
@@ -106,7 +106,7 @@ const FiltersPage = () => {
           initial_image,
         };
       });
-      setBuildings(buildingsFilt);
+      setBuildings(buildingsFiltered);
     } catch (error) {
       console.log(error);
     }
