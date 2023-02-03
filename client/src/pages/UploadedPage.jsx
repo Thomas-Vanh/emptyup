@@ -31,21 +31,22 @@ const req = async () => {
     const dat = response.data.data
     console.log(dat)
     const newPicture =  {
-     content : dat.profilpicture_url,
+      content : dat.profilpicture_url,
       id : dat.id,
       username : dat.username,
       admin_id:dat.admin_id
-      };
-     await setshowPicture(newPicture)
-     // await getBuildingsUploaded();
-     try {
+    };
+    await setshowPicture(newPicture)
+    // await getBuildingsUploaded();
+    try {
        const id = newPicture.id;
        console.log(id);
        const response =  await axios.get("/api/building/admin/" + id, {
            headers: {
              "ngrok-skip-browser-warning": "69420"
-           }
-         });
+          }
+        });
+
          const data = response.data.data;
          console.log(data)
          const BuildingsUploaded = data.map(building => {
