@@ -74,7 +74,7 @@ const UploadPage = () => {
     <div className="font-custom1  h-screen w-screen flex flex-col m-0 p-0">
       <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5">
         <Logo />
-        <LogoutButton />
+        <LogoutButton/>
       </div>
 
         <h3 className="h-1/6 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
@@ -150,7 +150,7 @@ const UploadPage = () => {
 
     <div className="w-1/2 h-1/2 flex box-border  border ">
       {coordinates.lat !== 0 && coordinates.lon !== 0 && (
-        <LeafletContainer center={[coordinates.lat, coordinates.lon]} zoom={13}>
+        <LeafletContainer className="w-1/2 h-1/2" center={[coordinates.lat, coordinates.lon]} zoom={13}>
           <LeafletMap coordinates={coordinates} onClick={() => setPopup(true)}>
             <Popup className="popup">
               {image && (

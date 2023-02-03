@@ -128,7 +128,7 @@ const BuildingPage = () => {
         <LogoutButton />
       </div>
       <h3 className="h-1/6 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
-        SPACE TO UP
+        SPACE # {building.building_id}
       </h3>
 
       <div className="h-4/6 flex box-border items-center justify-around rounded-[25px] ">
@@ -176,7 +176,7 @@ const BuildingPage = () => {
               />
 
             </div>
-<PostButton/>
+          <PostButton/>
           </form>
         </div>
         </div>

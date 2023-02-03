@@ -54,15 +54,14 @@ const apiUrl = '/api/annonces';
 const handleSubmit = (event) => {
 event.preventDefault()
 const id = uuidv4();
-const content = newDiscussion
-const userName= newUserName
+const username= newUserName
 
 
-const discussionToAdd={ id, content, userName}
+const discussionToAdd={  username}
 setDiscussions(prevDiscussions => [...prevDiscussions, discussionToAdd])
 setNewDiscussion("")
 
-axios.post(apiUrl+'/add', discussionToAdd)
+axios.post("/api/discussion", discussionToAdd)
    .then(response => {
       console.log("discussion added")
    })
@@ -85,14 +84,14 @@ axios.post(apiUrl+'/add', discussionToAdd)
          </h3>
 
         <div className="h-4/6 flex flex-col box-border items-center rounded-[25px] ">
-        <ul className=" shadow-inner h-4/6 box-border bg-slate-50  w-11/12  rounded-[25px] p-3 flex overflow-scroll flex-col items-start ">
+        <ul className=" shadow-inner h-5/6 box-border bg-slate-50  w-11/12  rounded-[25px] p-3 flex overflow-scroll flex-col items-start ">
               {discussions.map((discussion) => (<Discussion info={discussion} key={discussion.id}/>
               ))}
             </ul>
-        <form className=" flex justify-between flex-col items-center  h-2/6 w-11/12 mt-1" action="submit" onSubmit={handleSubmit}>
-          <div className=" w-full box-border h-2/5 flex mt-3 ">
+        <form className=" flex justify-between  items-center  h-1/6 w-11/12 mt-1" action="submit" onSubmit={handleSubmit}>
+          <div className=" w-full box-border  flex items-center mt-3 ">
             <h4 className="font-bold text-sm italic  ">
-            WRITE A MESSAGE TO:
+            OPEN A DISCUSSION WITH:
             </h4>
             <input className=" italic h-4 bg-slate-50 text-xs mx-3 text-blue-800 shadow-inner p-3 text-center"
                    value={newUserName}
@@ -100,19 +99,10 @@ axios.post(apiUrl+'/add', discussionToAdd)
                    placeholder="Enter the subject"
                    onChange={e => setNewUserName(e.target.value)}
             />
+           <PostButton className=" mt-2" type="submit"/>
           </div>
-
-          <div className=" w-full h-3/5     ">
-            <input className=" box-border text-center shadow-inner h-full rounded-[25px] w-full bg-slate-50 "
-            type="text"
-            value={newDiscussion}
-            placeholder="You can wrote a message here!"
-            onChange={e => setNewDiscussion(e.target.value)}
-            />
-          </div>
-
-          <PostButton className=" mt-2" type="submit"/>
         </form>
+
       </div>
 
       <footer className="h-1/12 flex pt-4 items-end justify-center">
