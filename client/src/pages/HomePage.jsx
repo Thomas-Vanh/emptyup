@@ -12,6 +12,7 @@ import LoginButton from "../components/LoginButton";
 import RegisterButton from "../components/RegisterButton";
 import LoginPicto from "../components/LoginPicto";
 import Logo from "../components/Logo";
+import Search from "../components/Search";
 
 const HomePage = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -98,6 +99,7 @@ const HomePage = () => {
   return (
     <div className="font-custom1  h-screen w-screen flex flex-col box-border m-0 p-0 ">
       <div className="flex h-1/12 w-full box-border justify-between p-5 ">
+        <Search />
         <Logo />
         <LoginPicto setActive={setModalActive1} />
         <Modal
@@ -154,7 +156,7 @@ const HomePage = () => {
         </Modal>
 
         <Modal active={modalActiveLog} setActive={setModalActiveLog}>
-          <FormLog/>
+          <FormLog />
         </Modal>
         <Modal active={modalActiveReg} setActive={setModalActiveReg}>
           <FormReg
