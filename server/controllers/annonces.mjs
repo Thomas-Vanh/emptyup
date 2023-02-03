@@ -62,13 +62,13 @@ export const getOneAnnonce = async (req, res) => {
 
 export const deleteAnnonce = async (req, res) => {
   const id = req.params.id;
-  const user_id = req.userId; /// req.userId quand middleware
+  console.log(id)
+  const user_id = req.userId;
+  console.log(user_id)
   const verif = await pool.query("SELECT user_id from annonces where id = $1", [
-    id,
-  ]);
+    id]);
   if (verif.rows[0].user_id !== user_id) {
-    /// l'activer que quand middleware auth ok
-    res.status(400).send({ info: "not authorized" });
+    return res.status(400).send({ info: "not authorized" });
   }
   try {
     const result = await pool.query("SELECT * FROM annonces WHERE id = $1", [
@@ -78,9 +78,7 @@ export const deleteAnnonce = async (req, res) => {
       return res.status(404).send({ error: "announcement not found" });
     }
     await pool.query("DELETE FROM annonces WHERE id = $1", [id]);
-    return res
-      .status(200)
-      .send({ message: "announcement deleted successfully" });
+    return res.status(200).send({ message: "announcement deleted successfully" });
   } catch (error) {
     console.error(error);
     return res.status(500).send({ error: "Internal server error" });

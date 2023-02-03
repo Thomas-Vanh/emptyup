@@ -3,13 +3,14 @@ import { pool } from "../models/dbPool.mjs";
 //////////////////////// ALL COMMENTS FOR ONE BUILDING ////////////////////////////
 
 export const getComments = async (req, res) => {
+  console.log(req.params)
   const building_id = req.params.id;
   if (!building_id) {
     return res.status(400).send({ error: "no building comments founded" });
   }
   try {
     const result = await pool.query(
-      "SELECT * FROM comments WHERE building_id=$1",
+      "SELECT comments.content, comments.date, comments.id,  users.username, users.profilpicture_url FROM comments LEFT JOIN users ON comments.user_id = users.id WHERE comments.building_id = $1",
       [building_id]
     );
     return res.json({ info: result.rows });
