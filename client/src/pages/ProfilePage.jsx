@@ -8,6 +8,7 @@ import Logo from "../components/Logo";
 import UploadLogo from "../components/UploadLogo"
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/Modal";
+import {useParams } from "react-router-dom";
 import UnsubscribeButton from "../components/UnsubscribeButton"
 import YesButton from "../components/YesButton"
 import NoButton from "../components/NoButton"
@@ -38,6 +39,8 @@ const ProfilePage = () => {
         id : dat.id,
         username : dat.username,
       };
+
+      newPicture.onload = () =>
       setshowPicture(newPicture)
 
     }
@@ -56,8 +59,10 @@ const ProfilePage = () => {
 
   const username=showPicture.username
   const content=showPicture.content
-const id=showPicture.id
-console.log(id)
+  const id=showPicture.id
+
+  console.log(id)
+
   return (
 
       <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
@@ -75,9 +80,10 @@ console.log(id)
           <div className="h-full w-1/2 flex flex-col  justify-center ">
             <div className=" w-full h-full flex justify-around items-center">
               <DownloadPicture />
-              <div className="h-full flex flex-col justify-center ">
-                <img src= {content}  className=" origin-center rounded-full  font-Custom1" />
+              <div className="h-72 w-72 border flex  shadow overflow:hidden rounded-full truncate">
+                <img src= {content} className=" object-cover h-full w-full  font-Custom1" />
               </div>
+
 
             </div>
             <div className="h-1/12 p-0 m-0 box-border flex">
@@ -109,14 +115,14 @@ console.log(id)
                 </button>
             </NavLink>
 
-            <NavLink to="/uploaded" className="">
-              <button onClick={() => navigate(`/uploaded/${id}`)} className="border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
+
+              <button onClick={() => navigate(`/uploaded`)} className="border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">
                 <p className="text-sm  "> SEE YOUR</p>
                 <img src={uploadpicto} alt="upload" className="flex box-border" style={{ height: '30px', marginTop :'2px'}}/>
                 <h4 className="text-2xl  "> UPLOADED  </h4>
                 <p className="text-sm  "> SPACES </p>
               </button>
-            </NavLink>
+
 
             <NavLink to="/announcements" className="">
               <button className=" border h-48 w-48 shadow rounded-xl mr-1 hover:bg-blue-800 hover:text-white font-bold cursor-pointer p-2 flex flex-col justify-around items-center">

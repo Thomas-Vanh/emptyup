@@ -88,6 +88,7 @@ console.log(error);
 
 const deletePost= (id) => {
 axios.delete(apiUrl+'/'+id)
+
 .then(response => {
 console.log("post deleted")
 })

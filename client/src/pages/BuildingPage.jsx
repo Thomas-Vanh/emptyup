@@ -141,8 +141,9 @@ const BuildingPage = () => {
                 <img
                   src={building.initial_image}
                   alt="building's img"
-                  className="  origin-top font-Custom1 h-72 "
+                  className="  object-cover h-full w-full font-Custom1 "
                 />
+
               </div>
               <div className="divInfo flex flex-col">
                 <p className="font-bold">City: {building.city}</p>
@@ -153,7 +154,7 @@ const BuildingPage = () => {
               </div>
             </div>
           ) : (
-            <div>Loading...</div>
+            <div className="flex w-full items-center justify-center">Loading...</div>
           )}
         </div>
         <div className="w-1/2 h-full flex flex-col">
@@ -163,36 +164,23 @@ const BuildingPage = () => {
             ))}
           </ul>
           <form
-            className="p-3 mt-4 flex justify-between box-border flex-col items-center border-dotted border-3 border border-black rounded-[25px] h-2/6 w-11/12"
+            className=" mt-4 flex justify-between   box-border flex-col items-center   h-2/6 w-11/12"
             action="submit"
-            onSubmit={handleSubmit}
-          >
-            <div className=" w-full box-border flex pb-2"></div>
-
-            <div className="box-border shadow-inner w-11/12 h-3/5     ">
+            onSubmit={handleSubmit}>
+            <div className="box-border shadow-inner rounded-[15px] w-full h-4/5     ">
               <input
-                className="  h-full w-full bg-slate-50 "
+                className="  h-full w-full text-center rounded-[15px] bg-slate-50 "
                 type="text"
                 value={newComment}
                 placeholder="You can wrote your comment here!"
                 onChange={(e) => setNewComment(e.target.value)}
               />
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="w-1/2 h-full flex flex-col">
-      <ul className=" shadow-inner h-4/6 box-border bg-slate-50 w-11/12  rounded-[25px] p-3 flex overflow-scroll flex-col items-start ">
-              {comments.map((comment) => (<Comment info={comment} key={comment.id}/>
-              ))}
-            </ul>
-        <form className="p-3 mt-4 flex justify-between box-border flex-col items-center border-dotted border-3 border border-black rounded-[25px] h-2/6 w-11/12" action="submit" onSubmit={handleSubmit}>
-          <div className=" w-full box-border flex pb-2">
 
-            <PostButton type="submit" />
+            </div>
+<PostButton/>
           </form>
         </div>
-      </div>
+        </div>
 
       <footer className="h-1/12  pt-4 flex justify-center">
         <NavLink to="/upload" className=" ">

@@ -30,9 +30,10 @@ const DownloadPicture = ({ submit}) => {
         onSubmit={onSubmit}
         className="h-full w-full flex flex-col items-center justify-center"
       >
-        <h2 className="text-xl">Download a profile picture: </h2>
+        <h2 className="text-xl text-blue-800 p-2 ">Download a profile picture: </h2>
         <Form.Group className="flex justify-center " controlId="image">
           <Form.Control
+          className="text-center flex p-2 justify-center "
             type="file"
            onChange={(event) => {
               if (event.target.files && event.target.files[0]) {
@@ -43,7 +44,7 @@ const DownloadPicture = ({ submit}) => {
             }}
             />
             </Form.Group>
-        <Button className="text-7xl" type="submit">+</Button>
+        <Button className="text-7xl  hover:drop-shadow h-18 " type="submit">+</Button>
       </Form>
 
   );

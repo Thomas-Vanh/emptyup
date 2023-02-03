@@ -6,11 +6,15 @@ import Building from "../components/Building"
 import LogoutButton from "../components/LogoutButton"
 import uploadpicto from "../assets/uploadpicto.png"
 import Logo from "../components/Logo"
+import {useParams } from "react-router-dom";
 
 const UploadedPage =() => {
 
   const [buildings, setBuildings] = useState([]);
   const [showPicture, setshowPicture] = useState("");
+
+
+
 
   useEffect(() => {
     req();
@@ -25,13 +29,42 @@ const req = async () => {
           });
     console.log (response)
     const dat = response.data.data
+    console.log(dat)
     const newPicture =  {
      content : dat.profilpicture_url,
       id : dat.id,
       username : dat.username,
       admin_id:dat.admin_id
       };
-   setshowPicture(newPicture)
+     await setshowPicture(newPicture)
+     // await getBuildingsUploaded();
+     try {
+       const id = newPicture.id;
+       console.log(id);
+       const response =  await axios.get("/api/building/admin/" + id, {
+           headers: {
+             "ngrok-skip-browser-warning": "69420"
+           }
+         });
+         const data = response.data.data;
+         console.log(data)
+         const BuildingsUploaded = data.map(building => {
+           const dateofpost = building.dateofpost;
+
+           const id = building.id;
+           const adress = building.adress;
+           const city = building.city;
+           const type = building.type;
+           const zipcode = building.zipcode;
+           const admin_id = building.admin_id;
+           const image=building.initial_image
+           return { id, adress, zipcode, city, type, dateofpost, admin_id, image};
+         });
+         setBuildings(BuildingsUploaded);
+       }
+       catch (error) {
+         console.log(error);
+       }
 
     }
 
@@ -43,37 +76,12 @@ const req = async () => {
 
 
 
-  useEffect(() => {
-  getBuildingsUploaded();
-  }, [])
 
   const getBuildingsUploaded = async () => {
-    try {
-      const user_id=await showPicture.id
-      console.log(user_id)
-      const response = await axios.get('/api/building/admin+id', {
-        headers: {
-          "ngrok-skip-browser-warning": "69420"
-        }
-      });
-      const data = response.data.data;
-      console.log(data)
-      const BuildingsUploaded = data.map(building => {
-        const dateofpost = building.dateofpost;
-        const id = building.id;
-        const adress = building.adress;
-        const city = building.city;
-        const type = building.type;
-        const zipcode = building.zipcode;
-        const admin_id = building.admin_id;
-        const image=building.initial_image
-        return { id, adress, zipcode, city, type, dateofpost, admin_id, image};
-      });
-      setBuildings(BuildingsUploaded);
-    }
-    catch (error) {
-      console.log(error);
-    }
+    console.log("getBuildingsUploaded")
+  // if (!showPicture.id) return;
+
+
   }
 
   const deleteBuilding= (id) => {
@@ -87,7 +95,7 @@ const req = async () => {
     setBuildings(buildings.filter((building) => building.id !== id))
   }
  const content=showPicture.content
-  console.log(content)
+
 
   return(
 <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
