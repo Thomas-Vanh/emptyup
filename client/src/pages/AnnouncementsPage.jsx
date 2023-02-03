@@ -1,14 +1,10 @@
 import LogoutButton from "../components/LogoutButton"
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from 'react-router-dom'
-import Back from "../components/Back";
-import ProfilePicture from "../components/ProfilePicture"
 import PostButton from"../components/PostButton"
 import Annoucement from "../components/Annoucement"
 import UploadLogo from "../components/UploadLogo";
-import Pp from '../assets/Pp.png';
 import { v4 as uuidv4 } from 'uuid';
 import Megaphone from "../assets/Megaphone.svg"
 import Logo from "../components/Logo"
@@ -128,7 +124,7 @@ const content=showPicture.content
 
 return (
       <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
-        <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5">
+      <div className="flex h-1/12 w-full box-border justify-between px-5 p-3 items-center ">
           <Logo/>
          <LogoutButton url={content} />
                  </div>
@@ -151,8 +147,8 @@ return (
         		<h4 className="font-bold text-sm italic ">
             SUBJECT:
             </h4>
-          	<input className=" italic h-4 bg-slate-50 text-xs mx-3 text-blue-800 shadow-inner p-3 text-center"
-            		   type="text"
+          	<input  className=" italic h-4 bg-slate-50 text-xs mx-3 text-blue-800 shadow-inner p-3 text-center"
+            		    type="text"
                     value={newSubject}
                     onChange={e => setNewSubject(e.target.value)}
             		   placeholder="Enter the subject"

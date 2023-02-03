@@ -1,4 +1,3 @@
-import Navigation from "../components/Navigation";
 import UploadLogo from "../components/UploadLogo";
 import { LeafletContainer } from "../maps/leaflet-container";
 import { LeafletMap } from "../maps/leaflet-map";
@@ -11,7 +10,9 @@ import Modal from "../components/Modal";
 import LoginPicto from "../components/LoginPicto";
 import FormLog from "../components/FormLog";
 import FormReg from "../components/FormReg";
-
+import FormLog1 from "../components/FormLog1";
+import Search from "../components/Search";
+import loupe from '../assets/loupe.png';
 const FiltersPage = () => {
   const [modalActive, setModalActive] = useState(false);
   const [modalActive1, setModalActive1] = useState(false);
@@ -146,59 +147,93 @@ const FiltersPage = () => {
 
   return (
     <div className="font-custom1  h-screen w-screen flex flex-col m-0 p-0">
-      <div className="flex flex-col items-center">
-        <div className="flex h-1/10 w-full box-border justify-between p-5 ">
+      <div className="flex h-1/12 w-full box-border justify-between px-5 p-3 items-center ">
           <Logo />
           <form
-            className="flex flex-col items-center p-2"
+            className="w-2/6  flex justify-between   mx-10 px-10 box-border items-center w-1/2"
             style={{ width: "100vw" }}
             onSubmit={handleSubmit}
           >
-            <div className="flex">
-              <div>
-                <label>
-                  City:
-                  <input
-                    id="inputCity"
-                    className="inputCity"
-                    type="text"
-                    placeholder="Enter your city"
-                    ref={inputRefCity}
-                  />
-                </label>
-              </div>
-              <label>
-                Zipcode:
-                <input
+
+          <h4 className="font-bold text-sm italic ">
+          City:
+          </h4>
+          <input
+                id="inputCity"
+                className="inputCity italic rounded-lg h-4 bg-slate-50 text-xs mr-10 text-blue-800 shadow-inner  text-center"
+                type="text"
+                placeholder="Enter your city"
+                ref={inputRefCity}
+          />
+          <h4 className="font-bold text-sm italic ">
+          Zipcode:
+          </h4>
+          <input
                   id="inputZipcode"
+                  className="inputCity italic rounded-lg h-4 bg-slate-50 mr-11 text-xs  text-blue-800 shadow-inner  text-center"
                   type="text"
                   placeholder="Enter your zipcode"
                   ref={inputRefZipcode}
-                />
-              </label>
-              <label>
-                Type:
-                <select ref={inputRefType} id="inputType">
+          />
+          <h4 className="font-bold text-sm italic pr-2 ">
+          Type:
+          </h4>
+          <select ref={inputRefType}
+              id="inputType"
+              className="  rounded-lg h-4 bg-slate-200  text-xs  text-center"
+          >
                   <option value=""></option>
                   <option value="All">All</option>
                   <option value="Housing">Housing</option>
                   <option value="Gardens">Gardens</option>
                   <option value="Factories">Factories</option>
                   <option value="Offices">Offices</option>
-                </select>
-              </label>
-            </div>
-            <button
+          </select>
+          <button
               type="submit"
-              className="bg-blue-800 text-white rounded-md p-1 mr-1 w-24 text-base font-medium hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-800"
+              className="rounded-full p-1 hover:shadow "
             >
-              Search
-            </button>
-          </form>
-          <LoginPicto setActive={setModalActive1} />
-        </div>
-        <div>{input}</div>
+<img src= {loupe} alt="loupe" className=" h-6  w-6" />
+</button>
+        </form>
+
+        <LoginPicto setActive={setModalActive1} />
+        <Modal
+          className="z-1"
+          active={modalActive1}
+          setActive={setModalActive1}
+        >
+          <p className="z-1 flex justify-center text-base">
+            You need to register and login{" "}
+          </p>
+          <div className=" z-1 flex justify-around">
+            <LoginButton onClick={onClickLog1} />
+            <RegisterButton onClick={onClickReg1} />
+          </div>
+        </Modal>
+
+        <Modal
+          className=" z-1 "
+          active={modalActiveLog1}
+          setActive={setModalActiveLog1}
+        >
+          <FormLog1 />
+        </Modal>
+        <Modal
+          className=" z-1 "
+          active={modalActiveReg1}
+          setActive={setModalActiveReg1}
+        >
+          <FormReg
+            onSubmit={(event) => {
+              event.preventDefault();
+              setModalActiveReg1(false);
+              setModalActiveLog1(true);
+            }}
+          />
+        </Modal>
       </div>
+
       <div className=" h-5/6  ">
         <LeafletContainer>
           <LeafletMap buildings={buildings} />

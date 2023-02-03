@@ -104,7 +104,7 @@ const dateofpost = date
 
   return(
 <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
-        <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5 ">
+      <div className="flex h-1/12 w-full box-border justify-between px-5 p-3 items-center ">
           <Logo/>
           <LogoutButton url={content} />
 </div>

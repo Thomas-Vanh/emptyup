@@ -88,7 +88,7 @@ const navigate=useNavigate()
     };
   return (
     <div className="font-custom1  h-screen w-screen flex flex-col m-0 p-0">
-      <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5">
+      <div className="flex h-1/12 w-full box-border justify-between px-5 p-3 items-center ">
         <Logo />
         <LogoutButton onClick={logout}/>
       </div>
