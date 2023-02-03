@@ -50,8 +50,12 @@ const req = async () => {
          const data = response.data.data;
          console.log(data)
          const BuildingsUploaded = data.map(building => {
-           const dateofpost = building.dateofpost;
 
+const date= new Date(building.dateofpost);
+const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+const dateofpost = date
+.toLocaleDateString("en-GB", options)
+.replace(/\//g, "/");
            const id = building.id;
            const adress = building.adress;
            const city = building.city;

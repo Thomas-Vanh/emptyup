@@ -74,15 +74,21 @@ const BuildingPage = () => {
         },
       });
       console.log(response);
-      const dat = response.data.data;
+      const dat = response.data.info;
       console.log(dat)
       const newComments = dat.map((comment) => {
         const content = comment.content;
         const id = comment.id;
-        const date = comment.date;
+        const dateofpost= new Date(comment.date);
+        const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+        const date = dateofpost
+        .toLocaleDateString("en-GB", options)
+        .replace(/\//g, "/");
         const user_id=comment.user_id
+        const username=comment.username
         const building_id=comment.building_id
-        return { id, content, building_id, user_id, date};
+        const image=comment.profilpicture_url
+        return { image, id, content, building_id, user_id, date, username};
       });
       setComments(newComments);
     } catch (error) {
@@ -108,11 +114,12 @@ const BuildingPage = () => {
     event.preventDefault();
     const id = uuidv4();
     const content = newComment;
+    const building_id=building.building_id
     const commentToAdd = { id, content };
     setComments((prevComments) => [...prevComments, commentToAdd]);
     setNewComment("");
     axios
-      .post("/building/" + "/add", commentToAdd)
+      .post("/api/building/"+building_id+"/postcomment", commentToAdd)
       .then((response) => {
         console.log("comment added");
       })
@@ -128,8 +135,7 @@ const BuildingPage = () => {
         <LogoutButton />
       </div>
       <h3 className="h-1/6 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
-        SPACE # {building.building_id}
-      </h3>
+        SPACE #      </h3>
 
       <div className="h-4/6 flex box-border items-center justify-around rounded-[25px] ">
         <div className="divForBuildingAndComments  w-1/2 h-full flex  ">

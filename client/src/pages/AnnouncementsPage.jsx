@@ -70,7 +70,11 @@ const dat = response.data.data
 const newPosts = dat.map(post => {
 const content = post.content;
 const subject = post.subject;
-const date = post.date;
+const dateofpost= new Date(post.date);
+const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+const date = dateofpost
+.toLocaleDateString("en-GB", options)
+.replace(/\//g, "/");
 const id = post.id;
 const user_id=post.user_id
 const city= post.city
@@ -142,7 +146,7 @@ return (
         			{posts.map((post) => (<Annoucement info={post} delete={deletePost} key={post.id}/>
         			))}
       			</ul>
-  			<form className="p-3 mt-4 flex justify-between box-border flex-col items-center border-dotted border-3 border border-black rounded-[25px] h-2/6 w-11/12" action="submit" onSubmit={handleSubmit}>
+  			<form className="p-3 mt-4 flex justify-between box-border flex-col items-center  h-2/6 w-11/12" action="submit" onSubmit={handleSubmit}>
           <div className=" w-full box-border flex pb-2">
         		<h4 className="font-bold text-sm italic ">
             SUBJECT:
@@ -164,7 +168,7 @@ return (
             />
           </div>
 
-          <div className="box-border shadow-inner w-11/12 h-3/5     ">
+          <div className="box-border shadow-inner rounded-[25px]  w-full h-3/5     ">
             <input className="  h-full w-full bg-slate-50 "
             type="text"
             value={newPost}
