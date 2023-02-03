@@ -15,40 +15,41 @@ import Logo from "../components/Logo"
 import Message from "../components/Message"
 import MessageIcon from "../assets/MessageIcon.svg"
 import Discussion from "../components/Discussion"
-const Username="Roro68"
-//change with backend
+
+
+
 const DiscussionsPage =() => {
 const [discussions, setDiscussions] = useState([]);
 const [newDiscussion, setNewDiscussion] = useState("")
 const [newUserName, setNewUserName] = useState("")
 const apiUrl = '/api/annonces';
 
-useEffect(() => {
-req();
-}, [])
+// useEffect(() => {
+// req();
+// }, [])
 
-const req = async () => {
-try {
-const response = await axios.get(apiUrl, {
-        headers: {
-          "ngrok-skip-browser-warning": "69420"
-        }
-      });
-console.log (response)
-const dat = response.data.data
-const newDiscussions = dat.map(discussion => {
-const content = discussion.content;
-const userName =discussion.userName
-const id = discussion.id;
-const user_id=discussion.user_id
-return { userName, id, content, user_id};
-});
-setDiscussions(newDiscussions)
-}
-catch (error) {
-console.log(error);
-}
-}
+// const req = async () => {
+// try {
+// const response = await axios.get(apiUrl, {
+//         headers: {
+//           "ngrok-skip-browser-warning": "69420"
+//         }
+//       });
+// console.log (response)
+// const dat = response.data.data
+// const newDiscussions = dat.map(discussion => {
+// const content = discussion.content;
+// const userName =discussion.userName
+// const id = discussion.id;
+// const user_id=discussion.user_id
+// return { userName, id, content, user_id};
+// });
+// setDiscussions(newDiscussions)
+// }
+// catch (error) {
+// console.log(error);
+// }
+// }
 
 const handleSubmit = (event) => {
 event.preventDefault()
@@ -88,9 +89,9 @@ axios.post(apiUrl+'/add', discussionToAdd)
               {discussions.map((discussion) => (<Discussion info={discussion} key={discussion.id}/>
               ))}
             </ul>
-        <form className="p-3 mt-4 flex justify-between box-border flex-col items-center border-dotted border-3 border border-black rounded-[25px] h-2/6 w-11/12" action="submit" onSubmit={handleSubmit}>
-          <div className=" w-full box-border flex pb-2">
-            <h4 className="font-bold text-sm italic ">
+        <form className=" flex justify-between flex-col items-center  h-2/6 w-11/12 mt-1" action="submit" onSubmit={handleSubmit}>
+          <div className=" w-full box-border h-2/5 flex mt-3 ">
+            <h4 className="font-bold text-sm italic  ">
             WRITE A MESSAGE TO:
             </h4>
             <input className=" italic h-4 bg-slate-50 text-xs mx-3 text-blue-800 shadow-inner p-3 text-center"
@@ -101,8 +102,8 @@ axios.post(apiUrl+'/add', discussionToAdd)
             />
           </div>
 
-          <div className="box-border shadow-inner w-11/12 h-3/5     ">
-            <input className="  h-full w-full bg-slate-50 "
+          <div className=" w-full h-3/5     ">
+            <input className=" box-border text-center shadow-inner h-full rounded-[25px] w-full bg-slate-50 "
             type="text"
             value={newDiscussion}
             placeholder="You can wrote a message here!"
@@ -110,7 +111,7 @@ axios.post(apiUrl+'/add', discussionToAdd)
             />
           </div>
 
-          <PostButton type="submit"/>
+          <PostButton className=" mt-2" type="submit"/>
         </form>
       </div>
 

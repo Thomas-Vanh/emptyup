@@ -71,80 +71,84 @@ const UploadPage = () => {
 
   };
   return (
-     <div className="font-custom1  h-screen w-screen flex flex-col m-0 p-0">
+    <div className="font-custom1  h-screen w-screen flex flex-col m-0 p-0">
       <div className="flex h-1/12 w-full box-border justify-between px-5 pt-5">
         <Logo />
         <LogoutButton />
       </div>
+
         <h3 className="h-1/6 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
       UPLOAD A SPACE
       </h3>
-      <div className="h-4/6 w-full p-10 flex box-border items-center justify-around  ">
 
-      <Form
+      <div className="h-4/6 w-full flex box-border items-center justify-around  ">
+        <Form
         onSubmit={onSubmit}
-        className="w-1/2 h-full flex flex-col justify-center  items-center font-bold text-xl"
-      >
-      <div className="flex w-full flex-col items-center">
-        <Form.Group  className="flex w-52 p-1 justify-start" controlId="image">
-          <Form.Label>Image: </Form.Label>
-          <Form.Control
-            type="file"
-                      className="text-xs font-normal  h-6 "
+        className="w-1/2  flex flex-col justify-center  items-center font-bold text-xl"
+        >
+          <div className="flex w-full flex-col items-center">
+            <Form.Group  className="flex w-52 p-1 justify-start" controlId="image">
+              <Form.Label>Image: </Form.Label>
+              <Form.Control
+              type="file"
+              className="text-xs font-normal  h-6 "
+              onChange={(event) => {
+                if (event.target.files && event.target.files[0]) {
+                  setImage(event.target.files[0]);
+                  console.log(event.target.files[0]);
+                  //URL.createObjectURL(event.target.files[0])
+                }
+              }}
+              />
+            </Form.Group>
+            <Form.Group className="flex p-1 w-52 justify-between" controlId="city">
+              <Form.Label>City:
+              </Form.Label>
+              <Form.Control
+              className="text-xs font-normal w-32 h-6 border rounded-xl p-1 px-3"
+              type="text"
+              ref={inputRefCity}
+              placeholder="Enter your city"
+              />
+            </Form.Group>
 
-            onChange={(event) => {
-              if (event.target.files && event.target.files[0]) {
-                setImage(event.target.files[0]);
-                console.log(event.target.files[0]);
-                //URL.createObjectURL(event.target.files[0])
+            <Form.Group className="flex p-1 w-52 justify-between" controlId="zipcode">
+              <Form.Label>Zipcode: </Form.Label>
+              <Form.Control
+              className="text-xs font-normal w-32 h-6 border rounded-xl p-1 px-3 "
+              type="text"
+              ref={inputRefZipcode}
+              placeholder="Enter your zipcode"
+              />
+            </Form.Group>
 
-              }
-            }}
-          />
-        </Form.Group>
-        <Form.Group className="flex p-1 w-52 justify-between" controlId="city">
-          <Form.Label>City: </Form.Label>
-          <Form.Control
-          className="text-xs font-normal w-32 h-6 border rounded-xl p-1 px-3"
-            type="text"
-            ref={inputRefCity}
-            placeholder="Enter your city"
-          />
-        </Form.Group>
-        <Form.Group className="flex p-1 w-52 justify-between" controlId="zipcode">
-          <Form.Label>Zipcode: </Form.Label>
-          <Form.Control
-          className="text-xs font-normal w-32 h-6 border rounded-xl p-1 px-3 "
-            type="text"
-            ref={inputRefZipcode}
-            placeholder="Enter your zipcode"
-          />
-        </Form.Group>
-        <Form.Group className="flex p-1  w-52 justify-between" controlId="address">
-          <Form.Label>Address: </Form.Label>
-          <Form.Control
-            className="text-xs font-normal w-32 h-6 border rounded-xl p-1 px-3 "
-            type="text"
-            ref={inputRefAddress}
-            placeholder="Enter your address"
-          />
-        </Form.Group>
-        <Form.Group className="flex w-52 p-1 justify-between" controlId="typeSelect">
-          <Form.Label>Type: </Form.Label>
-          <select className="text-xs w-24 h-5  font-normal" ref={inputRefType}>
-            <option className="text-xs font-normal" value="All"></option>
-            <option className="text-xs font-normal" value="Housing">Housing</option>
-            <option className="text-xs font-normal" value="Gardens">Gardens</option>
-            <option className="text-xs font-normal" value="Factories">Factories</option>
-            <option className="text-xs font-normal" value="Offices">Offices</option>
-            <option className="text-xs font-normal" value="Multiple">Multiple</option>
-          </select>
-        </Form.Group>
+            <Form.Group className="flex p-1  w-52 justify-between" controlId="address">
+              <Form.Label>Address: </Form.Label>
+              <Form.Control
+              className="text-xs font-normal w-32 h-6 border rounded-xl p-1 px-3 "
+              type="text"
+              ref={inputRefAddress}
+              placeholder="Enter your address"
+            />
+            </Form.Group>
+
+          <Form.Group className="flex w-52 p-1 justify-between" controlId="typeSelect">
+            <Form.Label>Type: </Form.Label>
+             <select className="text-xs w-24 h-5  font-normal" ref={inputRefType}>
+              <option className="text-xs font-normal" value="All"></option>
+              <option className="text-xs font-normal" value="Housing">Housing</option>
+              <option className="text-xs font-normal" value="Gardens">Gardens</option>
+              <option className="text-xs font-normal" value="Factories">Factories</option>
+              <option className="text-xs font-normal" value="Offices">Offices</option>
+              <option className="text-xs font-normal" value="Multiple">Multiple</option>
+            </select>
+          </Form.Group>
         </div>
-        <Button className="text-xl rounded-2xl p-3 mt-28 border "type="submit">Add a building</Button>
-      </Form>
 
-<div className="w-1/2 h-full flex box-border  border ">
+      <Button className="text-xl rounded-2xl p-3 mt-28 border "type="submit">Add a building</Button>
+    </Form>
+
+    <div className="w-1/2 h-1/2 flex box-border  border ">
       {coordinates.lat !== 0 && coordinates.lon !== 0 && (
         <LeafletContainer center={[coordinates.lat, coordinates.lon]} zoom={13}>
           <LeafletMap coordinates={coordinates} onClick={() => setPopup(true)}>
@@ -161,16 +165,17 @@ const UploadPage = () => {
               <p>Address: {inputRefAddress.current.value}</p>
               <p>Type: {inputRefType.current.value}</p>
             </Popup>
-          </LeafletMap>
-        </LeafletContainer>
-      )}
-      </div>
-      </div>
-       <footer className="h-1/12  pt-4 flex justify-center">
-           <div  className=" rounded-3xl p-1 px-3 flex items-center justify-start text-center text-black font-bold text-lg w-30 mb-4 ">
-    <img src={Logonotext} alt="Logo" className=" p-1 w-7 flex  justify-center font-bold item-center   "/>
-</div>
-        </footer>
+        </LeafletMap>
+      </LeafletContainer>
+          )}
+    </div>
+    </div>
+
+      <footer className="h-1/12  pt-4 flex justify-center">
+        <div  className=" rounded-3xl p-1 px-3 flex items-center justify-start text-center text-black font-bold text-lg w-30 mb-4 ">
+          <img src={Logonotext} alt="Logo" className=" p-1 w-7 flex  justify-center font-bold item-center   "/>
+        </div>
+      </footer>
     </div>
   );
 };
