@@ -95,8 +95,8 @@ const ProfilePage = () => {
 
           <div className=" w-full h-11/12 flex justify-around items-center">
             <DownloadPicture />
-            <div className="h-72 w-72 border flex  shadow overflow:hidden rounded-full truncate">
-            <img src= {content} className=" object-cover h-full w-full  font-Custom1" />
+            <div className="h-72 w-72 border flex bg-slate-50 shadow overflow:hidden rounded-full truncate">
+            <img src= {content} className=" object-cover   font-Custom1" />
           </div>
         </div>
         <div className="h-1/12 w-full p-0 m-0 box-border flex">
