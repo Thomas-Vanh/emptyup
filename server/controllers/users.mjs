@@ -68,17 +68,17 @@ export const login = async (req, res) => {
           expiresIn: "1h",
         }
       );
+      console.log(token)
       // return res.send({ token });  => it works when asking to response send the token, but "cannot generate" when sending to the cookie
       res.cookie("access_token", token, {
         httpOnly: true,
       });
      return res.send({ id: `${result.id}` });
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
       return res.status(500).send({ error: "Cannot generate token" });
     }
   } else {
-    console.error(err);
     return res.status(403).send({ error: "wrong password" });
   }
 };
