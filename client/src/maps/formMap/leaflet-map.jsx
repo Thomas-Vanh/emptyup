@@ -22,3 +22,4 @@ export const LeafletMap = ({coordinates, children}) => {
         </Marker>
     </div>;
 }
+

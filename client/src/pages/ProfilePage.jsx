@@ -14,6 +14,8 @@ import YesButton from "../components/YesButton"
 import NoButton from "../components/NoButton"
 import DownloadPicture from "../components/DownloadPicture"
 import axios from "axios";
+import Arrow from "../components/Arrow"
+
 
 const ProfilePage = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -22,29 +24,27 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    req();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("api/user/profile", {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
+        const dat = response.data.data;
+        const newPicture = {
+          content: dat.profilpicture_url,
+          id: dat.id,
+          username: dat.username,
+        };
+        setshowPicture(newPicture)
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
-
-  const req = async () => {
-    try {
-      const response = await axios.get("api/user/profile", {
-        headers: {
-          "ngrok-skip-browser-warning": "69420",
-        },
-      });
-      const dat = response.data.data;
-      const newPicture = {
-        content: dat.profilpicture_url,
-        id: dat.id,
-        username: dat.username,
-      };
-      setshowPicture(newPicture)
-
-    }
-    catch (error) {
-    console.log(error);
-    }
-  };
 
   const onClickYes = () => {
     setModalActive(false);
@@ -53,27 +53,25 @@ const ProfilePage = () => {
 
   const onClickNo = () => {};
 
-
-  const username=showPicture.username
-  const content=showPicture.content
-  const id=showPicture.id
+  const username = showPicture.username;
+  const content = showPicture.content;
+  const id = showPicture.id;
 
   console.log(id)
 
   const logout = async () => {
-      try {
-        const response = await axios.get("api/user/logout", {
-          headers: {
-            "ngrok-skip-browser-warning": "69420",
-          },
-        });
-        console.log(response)
-        navigate("/")
-      }
-      catch (error) {
+    try {
+      const response = await axios.get("api/user/logout", {
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+        },
+      });
+      console.log(response)
+      navigate("/")
+    } catch (error) {
       console.log(error);
-      }
-    };
+    }
+  };
 
   return (
     <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
@@ -89,27 +87,18 @@ const ProfilePage = () => {
       </h3>
 
 
-      <div className="flex w-full justify-between h-4/6 border-box  ">
+      <div className="flex h-full w-full justify-between h-4/6 border-box  ">
 
-        <div className="h-full w-1/2 flex-col flex justify-center   ">
+        <div className="h-11/12 w-1/2 bg-slate-50 rounded-lg  pr-5 mx-5 flex-col flex    ">
 
-          <div className=" w-full h-11/12 flex justify-around items-center">
+          <div className=" flex h-full items-center">
             <DownloadPicture />
-            <div className="h-72 w-72 border flex bg-slate-50 shadow overflow:hidden rounded-full truncate">
-            <img src= {content} className=" object-cover   font-Custom1" />
+            <div className="h-60 w-86  flex bg-white border-white shadow overflow:hidden rounded-full truncate">
+              <img src= {content} className=" object-cover w-96 h-96 font-Custom1" />
           </div>
         </div>
-        <div className="h-1/12 w-full p-0 m-0 box-border flex">
-            <UnsubscribeButton setActive={setModalActive} />
-            <Modal active={modalActive} setActive={setModalActive}>
-                <p className="flex justify-center py-5 text-base">Are you sure you want to unsubscribe from EmptyUp ?
-                </p>
-                <div className="flex px-10 py-5 justify-around">
-                  <YesButton onClick={onClickYes}/>
-                  <NoButton onClick={onClickNo}/>
-                </div>
-            </Modal>
-          </div>
+
+
         </div>
 
         <div className="flex h-full w-1/2 flex-wrap p-5 px-28 justify-between">
@@ -155,7 +144,17 @@ const ProfilePage = () => {
 
         </div>
 
-
+<div className="h-1/12 w-full p-0 m-0 box-border flex">
+            <UnsubscribeButton setActive={setModalActive} />
+            <Modal active={modalActive} setActive={setModalActive}>
+                <p className="flex justify-center py-5 text-base">Are you sure you want to unsubscribe from EmptyUp ?
+                </p>
+                <div className="flex px-10 py-5 justify-around">
+                  <YesButton onClick={onClickYes}/>
+                  <NoButton onClick={onClickNo}/>
+                </div>
+            </Modal>
+          </div>
         <footer className="h-1/12 pt-4 box-border flex justify-center">
           <NavLink to="/upload">
             <UploadLogo />

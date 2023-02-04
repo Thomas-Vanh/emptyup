@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from "react-router-dom";
 import UploadLogo from "../components/UploadLogo";
 import Building from "../components/Building"
 import LogoutButton from "../components/LogoutButton"
@@ -12,7 +12,7 @@ const UploadedPage =() => {
 
   const [buildings, setBuildings] = useState([]);
   const [showPicture, setshowPicture] = useState("");
-
+  const navigate = useNavigate();
 
 
 
@@ -100,13 +100,26 @@ const dateofpost = date
     setBuildings(buildings.filter((building) => building.id !== id))
   }
  const content=showPicture.content
+ const logout = async () => {
+    try {
+      const response = await axios.get("api/user/logout", {
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+        },
+      });
+      console.log(response)
+      navigate("/")
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   return(
 <div className="h-screen font-custom1  w-screen flex flex-col box-border ">
       <div className="flex h-1/12 w-full box-border justify-between px-5 p-3 items-center ">
           <Logo/>
-          <LogoutButton url={content} />
+           <LogoutButton url={content} onClick={logout} />
 </div>
 
 

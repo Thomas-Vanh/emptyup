@@ -2,6 +2,8 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 
 export const LeafletContainer = ({ children, zoom, center }) => {
+
+
   return (
     <MapContainer
       className="h-screen w-60 leaflet-map relative z-0"
