@@ -7,7 +7,7 @@ export const LeafletContainer = ({ children }) => {
     const { position } = useGeoLocation();
     const { userLocation } = useUserDefaultLocation(position);
 
-    return <MapContainer className="h-full w-full z-0 leaflet-map relative" style={{ height: "calc(80vh)" }} zoom={userLocation.zoom} center={userLocation}>
+    return <MapContainer className="h-full w-full z-0 leaflet-map relative" zoom={userLocation.zoom} center={userLocation}>
         <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
