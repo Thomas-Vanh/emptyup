@@ -167,7 +167,7 @@ const navigate=useNavigate()
 
     <div className="w-1/3 h-4/6 mr-20 rounded-full flex box-border overflow:hidden border truncate ">
       {coordinates.lat !== 0 && coordinates.lon !== 0 && (
-        <LeafletContainer className="object-cover h-full w-full font-Custom1" center={[coordinates.lat, coordinates.lon]} zoom={13}>
+        <LeafletContainer className="object-cover h-full w-full font-Custom1" center={[coordinates.lat, coordinates.lon]} zoom={5}>
           <LeafletMap coordinates={coordinates} onClick={() => setPopup(true)}>
             <Popup className="popup">
               {image && (
