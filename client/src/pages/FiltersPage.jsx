@@ -13,6 +13,8 @@ import FormReg from "../components/FormReg";
 import FormLog1 from "../components/FormLog1";
 import Search from "../components/Search";
 import loupe from '../assets/loupe.png';
+
+
 const FiltersPage = () => {
   const [modalActive, setModalActive] = useState(false);
   const [modalActive1, setModalActive1] = useState(false);
@@ -146,7 +148,7 @@ const FiltersPage = () => {
   };
 
   return (
-    <div className="font-custom1  h-screen w-screen flex flex-col m-0 p-0">
+    <div className="font-custom1 box-border h-screen w-screen flex flex-col m-0 p-0">
       <div className="flex h-1/12 w-full box-border justify-between px-5 p-3 items-center ">
           <Logo />
           <form
@@ -192,9 +194,9 @@ const FiltersPage = () => {
           <button
               type="submit"
               className="rounded-full p-1 hover:shadow "
-            >
-<img src= {loupe} alt="loupe" className=" h-6  w-6" />
-</button>
+          >
+            <img src= {loupe} alt="loupe" className=" h-6  w-6" />
+          </button>
         </form>
 
         <LoginPicto setActive={setModalActive1} />
@@ -234,11 +236,12 @@ const FiltersPage = () => {
         </Modal>
       </div>
 
-      <div className=" h-5/6  ">
+      <div className=" h-5/6   ">
         <LeafletContainer>
           <LeafletMap buildings={buildings} />
         </LeafletContainer>
       </div>
+
       <footer className="h-1/12 flex justify-center">
         <UploadLogo setActive={setModalActive} className="cursor-pointer" />
         <Modal active={modalActive} setActive={setModalActive}>
@@ -264,6 +267,7 @@ const FiltersPage = () => {
           />
         </Modal>
       </footer>
+
     </div>
   );
 };

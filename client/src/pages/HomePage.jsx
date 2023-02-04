@@ -11,7 +11,8 @@ import FormLog1 from "../components/FormLog1";
 import LoginButton from "../components/LoginButton";
 import RegisterButton from "../components/RegisterButton";
 import LoginPicto from "../components/LoginPicto";
-import Search from "../components/Search";
+import loupe from '../assets/loupe.png';
+
  import logonotext from '../assets/logonotext.png';
 
 const HomePage = () => {
@@ -99,14 +100,18 @@ const HomePage = () => {
   return (
     <div className="font-custom1  h-screen w-screen flex flex-col box-border m-0 p-0 ">
       <div className="flex h-1/12 w-full box-border justify-between px-5 p-3 items-center ">
-        <NavLink className=" w-2/6" to="/filters" >
-          <Search />
+        <NavLink className=" w-2/6 " to="/filters" >
+          <button
+              className="rounded-full p-1 hover:shadow "
+          >
+            <img src= {loupe} alt="loupe" className=" h-6  w-6" />
+          </button>
         </NavLink>
-         <div  className=" w-2/6 flex scale-150 justify-center items-center h-full box-border ml-4 text-l font-bold">
-          <p className="ml-2   font-bold font-custom2 cursor-default text-2xl text-left " alt="back to map">
+         <div  className=" w-2/6 flex justify-center items-center h-full box-border font-bold">
+          <p className="font-bold font-custom2 cursor-default text-3xl text-left " alt="back to map">
             Empty.up
           </p>
-          <img src= {logonotext} alt="logo" className=" ml-2 h-5 " />
+          <img src= {logonotext} alt="logo" className=" ml-3 h-6 " />
         </div>
         <LoginPicto setActive={setModalActive1} />
         <Modal

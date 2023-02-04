@@ -129,20 +129,18 @@ return (
          <LogoutButton url={content} />
                  </div>
 
-     	<h3 className="h-1/12 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
+     	<h3 className="h-1/6 m-1 uppercase text-black font-bold text-5xl flex items-center justify-center">
 			Posts
       <img src={Megaphone} alt="megaphone" className="flex box-border" style={{ height: '40px', marginLeft :'20px'}}/>
 
       </h3>
-      <SearchButton/>
 
-
-      <div className="h-4/6 flex flex-col box-border items-center rounded-[25px] ">
+      <div className="h-4/6 flex flex-col box-border justify-between items-center rounded-[25px] ">
 				<ul className=" shadow-inner h-4/6 box-border bg-slate-50  w-11/12  rounded-[25px] p-3 flex overflow-scroll flex-col items-start ">
         			{posts.map((post) => (<Annoucement info={post} delete={deletePost} key={post.id}/>
         			))}
       			</ul>
-  			<form className="p-3 mt-4 flex justify-between box-border flex-col items-center  h-2/6 w-11/12" action="submit" onSubmit={handleSubmit}>
+  			<form className="p-3 h-2/6 flex justify-between box-border flex-col items-center  h-2/6 w-11/12" action="submit" onSubmit={handleSubmit}>
           <div className=" w-full box-border flex pb-2">
         		<h4 className="font-bold text-sm italic ">
             SUBJECT:
@@ -164,8 +162,8 @@ return (
             />
           </div>
 
-          <div className="box-border shadow-inner rounded-[25px]  w-full h-3/5     ">
-            <input className="  h-full w-full bg-slate-50 "
+          <div className="box-border   w-full h-3/5     ">
+            <input className=" text-center rounded-[25px] h-full shadow-inner w-full bg-slate-50 "
             type="text"
             value={newPost}
             placeholder="You can wrote a message here!"
