@@ -1,16 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from 'react-router-dom'
 import UploadLogo from "../components/UploadLogo";
-import Back from "../components/Back";
 import Building from "../components/Building"
 import LogoutButton from "../components/LogoutButton"
-import uploadpicto from "../assets/uploadpicto.png"
 import Logo from "../components/Logo"
 import Heart from "../assets/heart.svg"
-import UploadPicture from "../components/UploadPicture"
-
 
 const FavoritesPage =() => {
   const [buildings, setBuildings] = useState([]);
