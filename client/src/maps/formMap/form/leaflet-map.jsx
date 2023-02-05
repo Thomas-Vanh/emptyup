@@ -2,12 +2,12 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Marker, useMap, Popup } from "react-leaflet";
-import useGeoLocation from "../hooks/geoLocationHook";
-import useUserDefaultLocation from "../hooks/userDefaultPositionHook";
+import useGeoLocation from "../../../hooks/geoLocationHook";
+import useUserDefaultLocation from "../../../hooks/userDefaultPositionHook";
 import { useEffect, useState } from "react";
 import L from "leaflet";
 
-export const LeafletMap = ({ buildings }) => {
+export const LeafletMap1 = () => {
   const [selectedBuilding, setSelectedBuilding] = useState(null);
 
   const { position } = useGeoLocation();
@@ -31,10 +31,10 @@ export const LeafletMap = ({ buildings }) => {
     iconSize: [30, 50],
     iconAnchor: [15, 25],
   });
-
+  
   return (
     <div>
-      {buildings.map((building) => (
+      {/* {buildings.map((building) => (
         <Marker
           key={building.id}
           position={{
@@ -59,7 +59,7 @@ export const LeafletMap = ({ buildings }) => {
             </button>
           </Popup>
         </Marker>
-      ))}
+      ))} */}
       <Marker key="1" position={userLocation} icon={userIcon2}>
         <Popup>Your location is here!</Popup>
       </Marker>

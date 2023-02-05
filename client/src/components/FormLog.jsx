@@ -36,7 +36,7 @@ const FormLog = () => {
   };
 
   return (
-    <div className="formContainer">
+    <div className="formContainer flex flex-col">
       <form
         className="flex flex-col"
         onSubmit={(event) => {
@@ -44,16 +44,24 @@ const FormLog = () => {
         }}
       >
         <div className="flex flex-col">
-          <input
-            type="text"
-            placeholder="Enter the email"
-            ref={inputRefEmail}
-          />
-          <input
-            type="password"
-            placeholder="Enter the password"
-            ref={inputRefPassword}
-          />
+        <label htmlFor="input">
+            Email:{" "}
+            <input
+              type="text"
+              placeholder="Enter your email"
+              ref={inputRefEmail}
+              className="p-1"
+            />
+          </label>
+          <label htmlFor="input">
+            Password:{" "}
+            <input
+              type="password"
+              placeholder="Enter your password"
+              ref={inputRefPassword}
+              className="p-1"
+            />
+          </label>
         </div>
         <div className="buttonDiv">
           <LoginButton type="submit" />

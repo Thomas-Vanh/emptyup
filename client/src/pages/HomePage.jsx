@@ -151,7 +151,9 @@ const HomePage = () => {
       </div>
       <div className=" h-5/6  ">
         <LeafletContainer>
-          <LeafletMap buildings={buildings} />
+          <LeafletMap 
+          buildings={buildings} 
+          />
         </LeafletContainer>
       </div>
 

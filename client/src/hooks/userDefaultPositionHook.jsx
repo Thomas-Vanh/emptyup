@@ -8,8 +8,7 @@ function useUserDefaultLocation(postion) {
             setUserLocation({ lat: postion.latitude, lng: postion.longitude, zoom: 13 })
         }
     }, [postion]);
-
-
+    
     return {
         userLocation,
     };

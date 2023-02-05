@@ -236,12 +236,15 @@ const FiltersPage = () => {
         </Modal>
       </div>
 
+      <h4 className="font-bold text-xl pr-2 text-center">
+          {input}
+          </h4>
+
       <div className=" h-5/6   ">
         <LeafletContainer>
           <LeafletMap buildings={buildings} />
         </LeafletContainer>
       </div>
-
       <footer className="h-1/12 flex justify-center">
         <UploadLogo setActive={setModalActive} className="cursor-pointer" />
         <Modal active={modalActive} setActive={setModalActive}>
