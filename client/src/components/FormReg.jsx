@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import axios from "axios";
-import RegisterButton from "../components/RegisterButton";
+import RegisterButton1 from "./RegisterButton1";
 
 const FormReg = ({ onSubmit }) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -17,6 +17,7 @@ const FormReg = ({ onSubmit }) => {
     console.log(inputRefPassword.current.value);
     console.log(inputRefConfPassword.current.value);
     setIsSubmitting(true);
+    setIsChecked(false);
     const data = {
       username: inputRefUsername.current.value,
       email: inputRefEmail.current.value,
@@ -90,12 +91,14 @@ const FormReg = ({ onSubmit }) => {
             <label htmlFor="input">
               The information provided on this website does not constitute legal
               advice, instead all the information and materials...
-              <a className="text-blue-800 underline" href="/terms">learn more</a>
+              <a className="text-blue-800 underline" href="/terms">
+                learn more
+              </a>
             </label>
           </div>
         </div>
         <div className="buttonDiv">
-          <RegisterButton type="submit" disabled={!isChecked} />
+          <RegisterButton1 type="submit" disabled={!isChecked} />
         </div>
       </form>
     </div>

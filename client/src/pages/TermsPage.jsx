@@ -1,3 +1,5 @@
+import { Button } from 'react-bootstrap'
+
 const TermsPage =() => {
 	return(
 		<div className="p-5"
