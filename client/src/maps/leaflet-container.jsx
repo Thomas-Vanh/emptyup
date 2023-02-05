@@ -8,16 +8,10 @@ export const LeafletContainer = ({ children }) => {
     const { userLocation } = useUserDefaultLocation(position);
     
     return <MapContainer className="h-full w-full z-0 leaflet-container relative" zoom={userLocation.zoom} center={userLocation}>
-         <TileLayer
-        url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}`}
-        id="mapbox/navigation-guidance-night-v2"
-        accessToken="pk.eyJ1IjoiYXJzZW5paWEtZCIsImEiOiJjbGNxMXQzdnAwMW13M3dwMHpiMjFqNHJ4In0.eVcS-5tEr2Ygie3da-XlKw"
-        attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
-      />
-        {/* <TileLayer
+        <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        /> */}
+        />
        {children}
     </MapContainer>;
 }

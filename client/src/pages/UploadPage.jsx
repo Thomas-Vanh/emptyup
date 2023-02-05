@@ -4,8 +4,8 @@ import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { LeafletContainer } from "../maps/formMap/leaflet-container";
 import { LeafletMap } from "../maps/formMap/leaflet-map";
-import { LeafletContainer1 } from "../maps/formMap/form/leaflet-container";
-import { LeafletMap1 } from "../maps/formMap/form/leaflet-map";
+import { LeafletContainer1 } from "../maps/formMap/formUserLoc/leaflet-container";
+import { LeafletMap1 } from "../maps/formMap/formUserLoc/leaflet-map";
 import { Popup } from "react-leaflet";
 import UploadLogo from "../components/UploadLogo";
 import SearchButton from "../components/SearchButton";
@@ -207,7 +207,7 @@ const UploadPage = () => {
           )}               
 
           {coordinates.lat !== 0 && coordinates.lon !== 0 && (
-        <LeafletContainer className="object-cover h-full w-full font-Custom1" center={[coordinates.lat, coordinates.lon]} zoom={5}>
+        <LeafletContainer className="object-cover h-full w-full font-Custom1" center={[coordinates.lat, coordinates.lon]} zoom={13}>
           <LeafletMap coordinates={coordinates} onClick={() => setPopup(true)}>
             <Popup className="popup">
               {image && (

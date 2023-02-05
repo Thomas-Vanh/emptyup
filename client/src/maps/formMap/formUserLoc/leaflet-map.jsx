@@ -4,6 +4,7 @@ import axios from "axios";
 import { Marker, useMap, Popup } from "react-leaflet";
 import useGeoLocation from "../../../hooks/geoLocationHook";
 import useUserDefaultLocation from "../../../hooks/userDefaultPositionHook";
+import pin from "../../../assets/pinmap.png"
 import { useEffect, useState } from "react";
 import L from "leaflet";
 
@@ -27,8 +28,8 @@ export const LeafletMap1 = () => {
   });
 
   const userIcon2 = L.icon({
-    iconUrl: markerIcon,
-    iconSize: [30, 50],
+    iconUrl: pin,
+    iconSize: [60, 60],
     iconAnchor: [15, 25],
   });
   
