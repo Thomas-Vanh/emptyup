@@ -1,27 +1,36 @@
 import { NavLink } from 'react-router-dom'
 import Picture from "../components/Picture"
-const Username="Roro68"
-const date=new Date().toLocaleDateString()
+
 
 const Building = (props) => {
   return(
-    <li className="flex justify-between  ">
-    <button className="text-2xl text-blue-800 pr-2 mb-3 w-5" onClick={()=>props.delete(props.info.id)} > x
+    <li className="flex  my-1 hover:bg-white w-full ">
+    <button className="text-xl bg-slate-300 hover:bg-blue-800 text-white flex justify-center items-center h-24 w-4" onClick={()=>props.delete(props.info.id)} > x
     </button>
+    <div class="h-24 w-24 border overflow-hidden">
+      <img src={props.info.image} alt="building picture" class="object-cover h-full w-full" />
+    </div>
 
-    <NavLink to="/annoucement" className="flex">
-    <Picture />
-    <div className="flex flex-col justify-between h-100  ">
-    <h5 className="text-blue-800 text-xl font-bold capitalize">{props.info.adress} {props.info.zipcode} {props.info.city}{""}</h5>
-    <p className="text-justify  text-sm pr-6   ">
-    {props.info.type}{""}
+    <div className="flex flex-col justify-between pl-2 h-24  ">
+
+
+    <h5 className="text-blue-800 text-lg font-bold pl-2 capitalize"> SPACE # {props.info.id}{""} </h5>
+    <p className="text-justify  text-xs pl-2   ">
+    Adress :{props.info.adress}{""}
     </p>
-    <p className="text-justify text-sm pr-6  ">
+    <p className="text-justify  text-xs pl-2   ">
+    {props.info.zipcode}{""}{props.info.city}{""}
+    </p>
+
+    <p className="text-justify text-xs pl-2">
+    Type: {props.info.type}{""}
+    </p>
+    <p className="text-justify text-xs pl-2  ">
     Created on {props.info.dateofpost}{""}
     </p>
 
     </div>
-    </NavLink>
+
     </li>
     )
 }

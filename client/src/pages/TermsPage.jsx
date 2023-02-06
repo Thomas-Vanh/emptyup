@@ -1,7 +1,10 @@
+import { Button } from 'react-bootstrap'
+
 const TermsPage =() => {
 	return(
-		<div> 
-			<h1>Terms and Conditions</h1>
+		<div className="p-5"
+		>
+			<h1 div className="p-5 text-xl font bold uppercase text-black font-bold text-5xl flex items-center justify-center custom-1 text-justify flex justify-center">Terms and Conditions</h1>
 			<p>Welcome to emptyup! </p> 
 			<p>These terms and conditions outline the rules and regulations for the use of a's Website, located at https://www.empty.up.</p> 
  			<p>By accessing this website we assume you accept these terms and conditions. Do not continue to use emptyup if you do not agree to take all of the terms and conditions stated on this page.</p> 

@@ -15,8 +15,9 @@ import Logo from "../components/Logo"
 import Message from "../components/Message"
 import MessageIcon from "../assets/MessageIcon.svg"
 import Discussion from "../components/Discussion"
-const Username="Roro68"
-//change with backend
+
+
+
 const DiscussionsPage =() => {
 const [discussions, setDiscussions] = useState([]);
 const [newDiscussion, setNewDiscussion] = useState("")
@@ -25,49 +26,47 @@ const apiUrl = '/api/annonces';
 
 useEffect(() => {
 req();
-}, [])
+ }, [])
 
-const req = async () => {
-try {
-const response = await axios.get(apiUrl, {
+ const req = async () => {
+ try {
+ const response = await axios.get("/api/discussion", {
         headers: {
           "ngrok-skip-browser-warning": "69420"
-        }
-      });
-console.log (response)
-const dat = response.data.data
-const newDiscussions = dat.map(discussion => {
-const content = discussion.content;
-const userName =discussion.userName
-const id = discussion.id;
-const user_id=discussion.user_id
-return { userName, id, content, user_id};
-});
-setDiscussions(newDiscussions)
-}
-catch (error) {
-console.log(error);
-}
-}
+       }
+       });
+ console.log (response)
+ const dat = response.data.data
+ const newDiscussions = dat.map(discussion => {
+ const userName =discussion.userName
+ const id = discussion.id;
+
+ return { userName, id};
+ });
+ setDiscussions(newDiscussions)
+ }
+ catch (error) {
+console.log(error); }
+ }
 
 const handleSubmit = (event) => {
 event.preventDefault()
 const id = uuidv4();
-const content = newDiscussion
-const userName= newUserName
+const username= newUserName
 
 
-const discussionToAdd={ id, content, userName}
+const discussionToAdd={  username}
 setDiscussions(prevDiscussions => [...prevDiscussions, discussionToAdd])
 setNewDiscussion("")
 
-axios.post(apiUrl+'/add', discussionToAdd)
+axios.post("/api/discussion", discussionToAdd)
    .then(response => {
       console.log("discussion added")
    })
    .catch(error => {
       console.log(error);
    });
+
 
 }
 
@@ -84,14 +83,14 @@ axios.post(apiUrl+'/add', discussionToAdd)
          </h3>
 
         <div className="h-4/6 flex flex-col box-border items-center rounded-[25px] ">
-        <ul className=" shadow-inner h-4/6 box-border bg-slate-50  w-11/12  rounded-[25px] p-3 flex overflow-scroll flex-col items-start ">
+        <ul className=" shadow-inner h-5/6 box-border bg-slate-50  w-11/12  rounded-[25px] p-3 flex overflow-scroll flex-col items-start ">
               {discussions.map((discussion) => (<Discussion info={discussion} key={discussion.id}/>
               ))}
             </ul>
-        <form className="p-3 mt-4 flex justify-between box-border flex-col items-center border-dotted border-3 border border-black rounded-[25px] h-2/6 w-11/12" action="submit" onSubmit={handleSubmit}>
-          <div className=" w-full box-border flex pb-2">
-            <h4 className="font-bold text-sm italic ">
-            WRITE A MESSAGE TO:
+        <form className=" flex justify-between  items-center  h-1/6 w-11/12 mt-1" action="submit" onSubmit={handleSubmit}>
+          <div className=" w-full box-border  flex items-center mt-3 ">
+            <h4 className="font-bold text-sm italic  ">
+            OPEN A DISCUSSION WITH:
             </h4>
             <input className=" italic h-4 bg-slate-50 text-xs mx-3 text-blue-800 shadow-inner p-3 text-center"
                    value={newUserName}
@@ -99,19 +98,10 @@ axios.post(apiUrl+'/add', discussionToAdd)
                    placeholder="Enter the subject"
                    onChange={e => setNewUserName(e.target.value)}
             />
+           <PostButton className=" mt-2" type="submit"/>
           </div>
-
-          <div className="box-border shadow-inner w-11/12 h-3/5     ">
-            <input className="  h-full w-full bg-slate-50 "
-            type="text"
-            value={newDiscussion}
-            placeholder="You can wrote a message here!"
-            onChange={e => setNewDiscussion(e.target.value)}
-            />
-          </div>
-
-          <PostButton type="submit"/>
         </form>
+
       </div>
 
       <footer className="h-1/12 flex pt-4 items-end justify-center">

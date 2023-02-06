@@ -2,8 +2,10 @@ import { pool } from "../models/dbPool.mjs";
 import pg from "pg";
 import { v2 as cloudinary } from "cloudinary";
 
+//************** */ Get buildings from the admin_id
 export const getUserAdminBuildings = async (req, res) => {
-  const user_id = req.params.id;
+  const user_id = req.params.id
+  console.log(user_id); 
   try {
     const result = await pool.query(
       "SELECT * FROM buildings where admin_id = $1 ",
@@ -12,10 +14,12 @@ export const getUserAdminBuildings = async (req, res) => {
 
     return res.status(200).json({ data: result.rows });
   } catch (error) {
+    console.error(error);
     res.status(400).send({ error: "invalid request" });
   }
-};
+}; 
 
+////////////// GET ALL the buildings  */
 export const getBuildings = async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM buildings");
@@ -29,6 +33,7 @@ export const getBuildings = async (req, res) => {
   }
 };
 
+//////////// Get building from his ID */
 export const getOneBuilding = async (req, res) => {
   const building_id = req.params.id;
   try {
@@ -45,9 +50,10 @@ export const getOneBuilding = async (req, res) => {
   }
 };
 
+////////////// retrieve building.s by infos in the body (filtering) */
+
 export const getBuildingby = async (req, res) => {
   const { adress, zipcode, city, type } = req.body;
-
   try {
     const result = await pool.query(
       "SELECT * FROM buildings WHERE adress = $1 OR zipcode = $2 OR city = $3 OR type = $4",
@@ -62,7 +68,7 @@ export const getBuildingby = async (req, res) => {
   }
 };
 
-//get one building by zipcode
+//get one building by zipcode///////////////////
 export const getZipcode = async (req, res) => {
   try {
     const building = await pool.query(
@@ -80,7 +86,7 @@ export const getZipcode = async (req, res) => {
   }
 };
 
-// get one building by city
+// get one building by city //////////////////
 export const getCity = async (req, res) => {
   try {
     const building = await pool.query(
@@ -98,7 +104,7 @@ export const getCity = async (req, res) => {
   }
 };
 
-//get one building by adress need to find a way to retrieve full adresses
+/////////////get one building by adress need to find a way to retrieve full adresses
 export const getAdress = async (req, res) => {
   try {
     const building = await pool.query(
@@ -116,15 +122,21 @@ export const getAdress = async (req, res) => {
   }
 };
 
-//// get building by type
+//// get building by type****************************************************
 export const getType = async (req, res) => {
   try {
     const building = await pool.query(
-      "SELECT * FROM buildings WHERE city = $1",
-      [req.params.city]
+      "SELECT * FROM buildings WHERE type = $1",
+      [req.params.type]
     );
+    if(req.params.type === "All"){
+     const building = await pool.query(
+        "SELECT * FROM buildings",
+     );
+     return res.json(building.rows)
+    }
     if (building.rows.length === 0) {
-      res.status(404).json({ message: "No building found with this city" });
+      res.status(404).json({ message: "No building found with this type" });
     } else {
       res.json(building.rows);
     }
@@ -134,9 +146,10 @@ export const getType = async (req, res) => {
   }
 };
 
-
+////////////////////// ADD a building in the database */
 export const addBuilding = async (req, res) => {
   const { adress, zipcode, city, type, lat, lon } = req.body;
+
   const file = req.files.image;
   const dateofpost = new Date();
   const user_id = req.userId;
@@ -173,6 +186,7 @@ export const addBuilding = async (req, res) => {
   }
 };
 
+////////////////// UPDATE infos of a building  */
 export const updateBuilding = async (req, res) => {
   try {
     const id = req.params;
@@ -188,6 +202,7 @@ export const updateBuilding = async (req, res) => {
   }
 };
 
+////////////////// delete a building from the database  */
 export const deleteBuilding = async (req, res) => {
   const id = req.params.id;
   const admin_id = req.userId;
