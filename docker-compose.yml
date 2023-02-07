@@ -37,13 +37,3 @@ services:
       - 5432:5432
    volumes:
     - ./docker/db/db-dump/schemaDb.sql:/docker-entrypoint-initdb.d/create_tables.sql
-
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: empty_up@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: K}63z-4NraxU~8
-    ports:
-      - "5050:5050"
