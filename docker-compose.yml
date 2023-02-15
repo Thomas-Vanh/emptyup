@@ -1,29 +1,28 @@
-version: '3.3'
+version: '3.4'  
 
 services:
   front:
     image: emptyup-front
     container_name: emptyup-front
     build:
+      context: .
       dockerfile: ./docker/front/Dockerfile
     restart: always
-    ports:
-      - 3000:3000
-    volumes:
-    - ./client:/var/www/emptyup
-    - /var/www/emptyup/node_modules
+    ports:      
+      - 3000:80
   back:
     image: emptyup-back
     container_name: emptyup-back
     build:
+      context: .
       dockerfile: ./docker/back/Dockerfile
     restart: always
+    environment:
+      - EMUP_HOST: db
+      - EMUP_DB: "empty_up_db"
+      - EMUP_PASSWORD: "K}63z-4NraxU~8"
     ports:
       - 3001:3000
-    volumes:
-    - ./server:/var/www/emptyup
-    - /var/www/emptyup/node_modules
-    - ./docker/back/.env:/var/www/emptyup/.env
 
   db:
    image: postgres
@@ -33,7 +32,5 @@ services:
       POSTGRES_DB: empty_up_db
       POSTGRES_USER: empty_up_db_admin
       POSTGRES_PASSWORD: K}63z-4NraxU~8
-   ports:
-      - 5432:5432
    volumes:
-    - ./docker/db/db-dump/schemaDb.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    - ./docker/db/db-dump/schemaDb.sql:/docker-entrypoint-initdb.d/create_tables.sql                                                                          
